@@ -1,1 +1,3 @@
-# RBCCPS-Collab
+# RBCCPS_Collab
+
+Collaboration repo

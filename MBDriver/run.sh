@@ -1,0 +1,3 @@
+export PYTHONDONTWRITEBYTECODE=1
+python3 MBMASTER.py  2>&1 | grep -P "WARNING"
+

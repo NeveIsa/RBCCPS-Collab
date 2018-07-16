@@ -1,0 +1,33 @@
+name: soundSensor
+location: RBCCPS
+modbusDevID: 2
+state: inactive
+priority: 2
+
+devIDRegister:
+        addr: 300
+        regType: holding
+
+deviceMetaID: 5
+
+readRegs:
+        - regType: holding
+          addr: 3
+          nRegs: 4
+          unit: Volts
+          rate: 10
+          mqttSubTopic: voltage
+
+        - regType: holding
+          addr: 4
+          nRegs: 5
+          unit: Amps
+          rate: 20
+          mqttSubTopic: current
+
+writeRegs:
+        - regType: holding
+          addr: 0
+          mqttSubTopic: hello/world
+          rate: 0
+

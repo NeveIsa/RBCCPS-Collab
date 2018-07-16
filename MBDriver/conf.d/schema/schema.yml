@@ -1,0 +1,114 @@
+name: 
+     type: string
+     required: True
+
+location:
+        type: string
+        required: False
+
+modbusDevID:
+        type: integer
+        min: 2
+        max: 247
+        required: True
+
+deviceMetaID:
+        type: integer
+        min: 0
+        required: True
+
+devIDRegister:
+        required: True
+        type: dict
+        schema:
+                addr: 
+                        type: integer
+                        min: 0
+                        max: 10000
+                regType: 
+                        type: string
+                        allowed:
+                                - holding       # output holding reg
+                                - input         # analog input regs
+
+state:
+        required: True
+        type: string
+        allowed:
+                - active
+                - inactive
+                - dormant
+
+priority:
+        required: True
+        type: integer
+        min: 0
+        max: 2
+
+readRegs:
+        type: list
+        schema: 
+                type: dict
+                schema:
+                        regType:
+                                required: True
+                                type: string
+                                allowed: 
+                                        - holding
+                                        - input
+                        addr:
+                                required: True
+                                type: integer
+                                max: 65535
+                                min: 0
+                        nRegs:
+                                required: True
+                                type: integer 
+                                max: 100
+                                min: 1
+                        unit:
+                                required: False
+                                type: string
+                        rate:
+                                required: True
+                                type: float
+                                max: 500
+                                min: 0.001
+
+                        mqttSubTopic:
+                                required: True
+                                type: string
+                                 
+
+writeRegs:
+        type: list
+        schema:
+                type: dict
+                schema:
+                        regType:
+                                required: True
+                                type: string
+                                allowed: 
+                                        - holding
+                                        #- input
+                        addr:
+                                required: True
+                                type: integer
+                                max: 65535
+                                min: 0
+                        mqttSubTopic:
+                                required: True
+                                type: string
+                        rate:
+                                # Maybe writing is not scheduled but is done async as message arrives on MQTT topic
+                                # In such case rate is set to zero (0)
+                                # Currently only async is allowed, so must be enforced to zero (0)
+                                required: True 
+                                type: float
+                                max: 0
+                                min: 0
+
+
+
+
+

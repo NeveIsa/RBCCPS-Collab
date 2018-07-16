@@ -1,0 +1,25 @@
+# Driver Name
+DRIVER_NAME: modbus
+
+# Modbus Client Conf.
+serialConf:
+        method: rtu
+        port: /dev/ttyACM0
+        baudrate: 19200
+        parity: N
+        stopbits: 1
+        bytesize: 8
+        timeout: 1 # in seconds
+
+# Custom conf.
+MAX_POLL_RATE: 50 # in Hertz -> 50Hz@ 19200
+DEVICE_CONF_UPDATE_CHECK_INTERVAL: 60 # in secs
+
+MB_DISCOVERY_INTERVAL: 60 #in secs
+MB_DISCOVERY_DEVICE_ID: 1 
+MB_DISCOVERY_DEVICE_META_REGISTER_ADDR: 0
+
+# MQTT conf
+MQTT_HOST: localhost
+MQTT_PORT: 1883
+

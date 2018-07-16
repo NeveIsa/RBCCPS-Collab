@@ -1,0 +1,34 @@
+name: lightSensor
+location: RBCCPS
+modbusDevID: 2
+state: inactive
+priority: 1
+
+devIDRegister: int
+        addr: 200
+        regType: holding
+
+readRegs:
+        - regType: holding
+          format:
+            extract: int
+            byte_endianess: little_endian
+            word_endianess: big_endian
+          addr: 0
+          unit: Volts
+          rate: 100
+          mqttSubTopic: voltage
+
+        - regType: holding
+          addr: 0
+          nRegs: 5
+          unit: Amps
+          rate: 100
+          mqttSubTopic: current
+
+writeRegs:
+        - regType: input
+          addr: 0
+          mqttTopic: /hello/world
+          rate: 200
+
