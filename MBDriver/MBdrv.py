@@ -22,11 +22,35 @@ from gwtools import services as gwservices
 device=gwservices.Device(drvConf["DRIVER_NAME"])
 device.setup()
 
+
+### CONNECT TO SERIAL ###
+
 logging.info("Attempting : {}:{}".format(drvConf["serialConf"]["port"],drvConf["serialConf"]["baudrate"]))
 client=ModbusClient(**drvConf["serialConf"])
-if not client.connect():exit()
+if not client.connect():
+    logging.error("Could not connect to serial port... Exiting")
+    exit()
 time.sleep(3)
 logging.info("Connected...")
+
+
+'''
+oldwrite = client.socket.write
+
+def mywrite(string):
+    if type(string)==int:
+        oldwrite(string)
+    else:
+        for c in string:
+            oldwrite(c)
+            time.sleep(0.05)
+    logging.error("----------------------->>>>>")
+
+client.socket.write = mywrite
+'''
+
+### CONNECT TO SERIAL ###
+
 
 def discoverNewDev():
     """
