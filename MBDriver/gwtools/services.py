@@ -81,7 +81,11 @@ class Device:
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
-        self.client.connect(CONF["MQTT_HOST"], CONF["MQTT_PORT"], 60)
+        try:
+            self.client.connect(CONF["MQTT_HOST"], CONF["MQTT_PORT"], 60)
+        except Exception as e:
+            logging.error("In setup(services.py) --> Couldn't connect to MQTT Broker.")
+            sys.exit(1)
 
     def reportSensorVal(self,mqttTopic,payload):
         mqttTopic =  "{}/{}".format(self.sensorReportTopic,mqttTopic)
