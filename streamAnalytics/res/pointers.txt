@@ -1,0 +1,37 @@
+complex event processing
+stream processing
+event stream processing
+extract transform load
+
+
+tools available-->
+
+Apache-Flink-> scala api is great
+Siddhi
+PipelineDB
+wso2 stream processor
+FlumeBase
+CEP-Lite - developed at RBCCPS
+EsperTech
+River - awesome api,nodejs,notmaintained
+
+Apache- Samza
+Apache Apex
+
+batch processing tools
+----------------------
+Apache - Storm
+Apache - Trident
+
+----
+tools that might help
+---
+Apache Thrift
+
+
+
+------------------------
+Important jargons and programming paradigms
+-----------------------
+mapreduce
+flatmap ->  map and then flatten (python doesnt have flatten but ruby and many other languages have, numpy has flatten)
