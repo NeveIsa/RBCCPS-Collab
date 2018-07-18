@@ -8,13 +8,15 @@ from pprint import pprint
 # sched.scheduler work with gevent time and sleep funtions
 MBSCHED = sched.scheduler(time.time, time.sleep)
 
-def modbusPoll(devID,addr,nRegs,regType,devName,mqttSubTopic):
+def modbusPoll(entry):
     """
     devID:                  modbus Dev ID
     addr:                   register Addr
     nRegs:                  no. of registers to read in contiguous read
     regType
     """
+
+    devID,addr,nRegs,regType,devName,scaling,mqttSubTopic = entry["devID"],entry["addr"],entry["nRegs"],entry["regType"],entry["devName"],entry["scaling"],entry["mqttSubTopic"]
         
     
     logging.info("Dummy modbusPoll | %s | devID:%s addr:%s nReg:%s regType:%s devName:%s mqttSubTopic:%s" % (time.time(),devID,addr,nRegs,regType,devName,mqttSubTopic))
@@ -35,6 +37,8 @@ def generate_scheduler_entries(mbconfig,priorities):
 
         devID=thisConf["modbusDevID"]
         devName=thisConf["name"]
+        devModbusEndianness = thisConf["devModbusEndianness"]
+
 
         if "readRegs" in thisConf:
             readRegs=thisConf["readRegs"]
@@ -48,19 +52,26 @@ def generate_scheduler_entries(mbconfig,priorities):
         else:
             writeRegs=[]
 
+        
+        # INSERT IMPORTANT CONFIGS FROM CONFIG FILE INTO INDIVIDUAL ENRTRIES
+
         for i in range(len(readRegs)):
             readRegs[i]["devID"]=devID
             readRegs[i]["devName"]=devName
+            readRegs[i]["devModbusEndianness"]=devModbusEndianness
             readRegs[i]["timeperiod"]=1.0/readRegs[i]["rate"]
 
         for i in range(len(writeRegs)):
             writeRegs[i]["devID"]=devID
             writeRegs[i]["devName"]=devName
+            readRegs[i]["devModbusEndianness"]=devModbusEndianness
+            
             if writeRegs[i]["rate"]>0:
                 writeRegs[i]["timeperiod"]=1.0/writeRegs[i]["rate"]
             else:
                 writeRegs[i]["timeperiod"]=0
 
+        # INSERT IMPORTANT CONFIGS FROM CONFIG FILE INTO INDIVIDUAL ENRTRIES
 
         for r in readRegs:
             logging.info ("read--> %s " % r)
@@ -96,7 +107,7 @@ def oneshot_schedule(entries):
 
     for entry in entries:
         tp=entry["timeperiod"]
-        args=(entry["devID"],entry["addr"],entry["nRegs"],entry["regType"],entry["devName"],entry["mqttSubTopic"])
+        args=(entry,)
         shots=int(maxTP/tp)
         
         logging.info("Adding scheduler entry --> devID:%s addr:%s" % (entry["devID"],entry["addr"]))
@@ -110,7 +121,7 @@ def oneshot_schedule(entries):
             # is a blocking call, hence there wont be collision on the serial bus
 
             # push the entries to scheduler.queues
-            MBSCHED.enter( _ * tp ,1, modbusPoll,args)
+            MBSCHED.enter( _ * tp ,1, modbusPoll,argument=args)
             #print ("--->" ,_ * tp,end=",")
         #print("\n")
 

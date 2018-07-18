@@ -34,20 +34,6 @@ time.sleep(3)
 logging.info("Connected...")
 
 
-'''
-oldwrite = client.socket.write
-
-def mywrite(string):
-    if type(string)==int:
-        oldwrite(string)
-    else:
-        for c in string:
-            oldwrite(c)
-            time.sleep(0.05)
-    logging.error("----------------------->>>>>")
-
-client.socket.write = mywrite
-'''
 
 ### CONNECT TO SERIAL ###
 
@@ -70,9 +56,11 @@ def discoverNewDev():
         return newDevInfo
     
 
-def readReg(devID, addr, nRegs, regType, devName, mqttSubTopic):
+def readReg(entry):
     """To read the register, given its deviceID, register address, number of registers and register type."""
-      
+    
+    devID,addr,nRegs,regType,devName,scaling,mqttSubTopic,unpackFormat,devModbusEndianness = entry["devID"],entry["addr"],entry["nRegs"],entry["regType"],entry["devName"],entry["scaling"],entry["mqttSubTopic"],entry["unpackFormat"],entry["devModbusEndianness"]
+
     if regType=="holding":
         result=client.read_holding_registers(addr,nRegs,unit=devID)                                    
     elif regType=="input":
@@ -85,12 +73,26 @@ def readReg(devID, addr, nRegs, regType, devName, mqttSubTopic):
         logging.error ("Couldn't read register in function 'readReg' \n\t--> devID:%s  addr:%s  nRegs:%s  regType:%s" % (devID, addr, nRegs,regType))
         return None
 
+    if unpackFormat=="integer":
+        dataValue = result.registers[0]
+    elif unpackFormat=="float":
+        logging.error("In readReg --> unpackFormat - float : Not supported yet")
+        return 
+
     logging.info("In readReg -> %.3f | devID:%s addr:%s  nRegs:%s devName:%s regValues: %s mqttSubTopic:%s" % (time.time(),devID,addr,nRegs,devName,result.registers,mqttSubTopic))
     subTopic="{}/{}".format(devName,mqttSubTopic)
-    device.reportSensorVal(subTopic,str(result.registers))
+    device.reportSensorVal(subTopic,str(dataValue))
     return result.registers
 
-def writeReg(devID,addr,data2write):
+def writeReg(entry,data2write):
+    devID,addr,devModbusEndianness,packFormat = entry["devID"],entry["addr"],entry["devModbusEndianness"],entry["packFormat"]
+    
+    if packFormat=="integer":
+        pass
+    elif packFormat=="float":
+        logging.error("In writeReg --> packFormat - float: Not supported yet...")
+        return
+
     if type(data2write)==list:
         print(client.write_registers(addr,data2write,unit=devID))
     elif type(data2write)==int:

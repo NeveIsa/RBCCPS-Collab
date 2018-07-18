@@ -4,8 +4,8 @@ DRIVER_NAME: modbus
 # Modbus Client Conf.
 serialConf:
         method: rtu
-        #port: /dev/ttyACM0
-        port: /dev/ttyUSB0
+        port: /dev/ttyACM0
+        #port: /dev/ttyUSB0
         baudrate: 19200
         parity: N
         stopbits: 1

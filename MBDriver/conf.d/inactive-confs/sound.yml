@@ -10,24 +10,34 @@ devIDRegister:
 
 deviceMetaID: 5
 
+devModbusEndianness:
+        word: big
+        byte: big
+
 readRegs:
         - regType: holding
           addr: 3
           nRegs: 4
+          unpackFormat: integer
           unit: Volts
           rate: 10
+          scaling: 1.0
           mqttSubTopic: voltage
 
         - regType: holding
           addr: 4
           nRegs: 5
+          unpackFormat: integer
           unit: Amps
           rate: 20
+          scaling: 1.0
           mqttSubTopic: current
 
 writeRegs:
         - regType: holding
           addr: 0
+          packFormat: integer
+          scaling: 1.0
           mqttSubTopic: hello/world
           rate: 0
 

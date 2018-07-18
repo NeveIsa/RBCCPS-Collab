@@ -43,9 +43,9 @@ class Device:
     def on_connect(self,client,userdata, flags, rc):
         # The callback for when the client receives a CONNACK response from the server.
         if rc==0:
-            logging.warning("In on_connect -> Connected to %s:%s with result code " % (CONF["MQTT_HOST"], CONF["MQTT_PORT"]) + str(rc)  )
+            logging.warning("In on_connect -> Connected to MQTT Broker @ %s:%s with result code " % (CONF["MQTT_HOST"], CONF["MQTT_PORT"]) + str(rc)  )
         else:
-            logging.error("In on_connect -> Failed to connect to %s:%s with result code " % (CONF["MQTT_HOST"], CONF["MQTT_PORT"]) + str(rc)  )
+            logging.error("In on_connect -> Failed to connect to MQTT Broker @ %s:%s with result code " % (CONF["MQTT_HOST"], CONF["MQTT_PORT"]) + str(rc)  )
             import sys
             sys.exit(1)
 
@@ -68,7 +68,7 @@ class Device:
 
     def on_message(self,client, userdata, msg):
         # The callback for when a PUBLISH message is received from the server.
-        logging.warning("In on_message -> Topic:%s | Message: %s" % (msg.topic,str(msg.payload)[:10]) )
+        logging.warning("In on_message -> Topic: %s | Message: %s" % (msg.topic,str(msg.payload)[:10]) )
         
         # Get subtopic
         subtopic = msg.topic.replace(self.actionListeningTopic+"/","")
@@ -83,6 +83,7 @@ class Device:
         self.client.on_message = self.on_message
         try:
             self.client.connect(CONF["MQTT_HOST"], CONF["MQTT_PORT"], 60)
+            logging.warning("In setup(services.py) --> Connecting to MQTT Broker @ %s:%s" % (CONF["MQTT_HOST"], CONF["MQTT_PORT"]))
         except Exception as e:
             logging.error("In setup(services.py) --> Couldn't connect to MQTT Broker.")
             sys.exit(1)
@@ -113,7 +114,7 @@ class Device:
 
             realtopic = "{}/{}".format(self.actionListeningTopic,topic)
 
-            logging.warning("In subscribeIncomingSubtopics -> Subscribing to:%s | realtopic:%s" % (topic,realtopic))
+            logging.warning("In subscribeIncomingSubtopics -> Subscribing to: %s | realtopic: %s" % (topic,realtopic))
             
             self.client.subscribe(realtopic)
         

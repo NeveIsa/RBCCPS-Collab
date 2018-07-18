@@ -45,6 +45,25 @@ priority:
         min: 0
         max: 2
 
+
+devModbusEndianness:
+        required: True
+        type: dict
+        schema:
+                word:
+                        required: True
+                        type: string
+                        allowed:
+                                - big
+                                - little
+                byte:
+                        required: True
+                        type: string
+                        allowed:
+                                - big
+                                - little
+
+
 readRegs:
         type: list
         schema: 
@@ -69,11 +88,23 @@ readRegs:
                         unit:
                                 required: False
                                 type: string
+                        
+                        unpackFormat:
+                                required: True
+                                type: string
+                                allowed: 
+                                        - integer
+                                        - float
+                                        
                         rate:
                                 required: True
                                 type: float
                                 max: 500
-                                min: 0.001
+                                min: 0.0014
+                        scaling:
+                                required: False
+                                type: float
+                                min: 0
 
                         mqttSubTopic:
                                 required: True
@@ -96,6 +127,19 @@ writeRegs:
                                 type: integer
                                 max: 65535
                                 min: 0
+
+                        packFormat:
+                                required: True
+                                type: string
+                                allowed:
+                                        - integer
+                                        - float
+                        
+                        scaling:
+                                required: False
+                                type: float
+                                min: 0
+
                         mqttSubTopic:
                                 required: True
                                 type: string

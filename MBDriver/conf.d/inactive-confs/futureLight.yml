@@ -8,27 +8,33 @@ devIDRegister: int
         addr: 200
         regType: holding
 
+devModbusEndianness:
+        word: big
+        byte: big
+
 readRegs:
         - regType: holding
-          format:
-            extract: int
-            byte_endianess: little_endian
-            word_endianess: big_endian
           addr: 0
+          unpackFormat: integer
           unit: Volts
           rate: 100
+          scaling: 1.0
           mqttSubTopic: voltage
 
         - regType: holding
           addr: 0
           nRegs: 5
+          unpackFormat: integer
           unit: Amps
           rate: 100
+          scaling: 1.0
           mqttSubTopic: current
 
 writeRegs:
         - regType: input
           addr: 0
+          packFormat: integer
           mqttTopic: /hello/world
+          scaling: 1.0
           rate: 200
 

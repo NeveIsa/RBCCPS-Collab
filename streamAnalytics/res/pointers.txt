@@ -5,9 +5,11 @@ extract transform load
 
 
 tools available-->
-
+eventn - eventn.com
+norikra --->  http://norikra.github.io/wq
 Apache-Flink-> scala api is great
 Siddhi
+RethinkDB
 PipelineDB
 wso2 stream processor
 FlumeBase
@@ -35,3 +37,10 @@ Important jargons and programming paradigms
 -----------------------
 mapreduce
 flatmap ->  map and then flatten (python doesnt have flatten but ruby and many other languages have, numpy has flatten)
+
+
+----------------
+Other Tools
+-----------------
+NoFlo -> Flow Based Programming for js
+

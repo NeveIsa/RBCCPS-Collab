@@ -92,7 +92,7 @@ def mainLoadConfig():
         print("NOW PROCESSING CONF_FILE: "+curFile)  # HERE
             
         if isFileUpdated(curFile):
-            print("--> Found modified")
+            print(bcolors.WARNING + "--> Found modified" + bcolors.ENDC)
             if validateConfigFile(curFile):
                 print(bcolors.OKGREEN + "--> Valid Conf..." + bcolors.ENDC)
                 MODBUS_CONFIG[curFile]=readConfigFile(curFile)
