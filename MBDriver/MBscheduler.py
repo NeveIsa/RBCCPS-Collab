@@ -64,7 +64,7 @@ def generate_scheduler_entries(mbconfig,priorities):
         for i in range(len(writeRegs)):
             writeRegs[i]["devID"]=devID
             writeRegs[i]["devName"]=devName
-            readRegs[i]["devModbusEndianness"]=devModbusEndianness
+            writeRegs[i]["devModbusEndianness"]=devModbusEndianness
             
             if writeRegs[i]["rate"]>0:
                 writeRegs[i]["timeperiod"]=1.0/writeRegs[i]["rate"]

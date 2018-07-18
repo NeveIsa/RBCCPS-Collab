@@ -96,7 +96,7 @@ while True:
         entryNeedsWrite = list(filter(lambda x:x["mqttSubTopic"]==msg["subtopic"], write_entries))
         for entry in entryNeedsWrite:
             #logging.warning(entry)
-            msg = int(msg)
+            msg = int(msg['message'])
             MBdrv.writeReg(entry,data2write=msg)
 
 
