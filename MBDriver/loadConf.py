@@ -6,6 +6,7 @@ import time
 import datetime
 import json
 import yaml
+
 from pprint import pprint
 
 # Validate YAML per conf file

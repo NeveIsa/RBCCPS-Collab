@@ -14,15 +14,15 @@ devModbusEndianness:
         word: big
         byte: big
 
-readRegs:
-        - regType: holding
-          addr: 0
-          nRegs: 1
-          unpackFormat: integer
-          unit: Volts
-          rate: 5
-          scaling: 1.0
-          mqttSubTopic: voltage
+        #readRegs:
+        #        - regType: holding
+        #          addr: 0
+        #          nRegs: 1
+        #          unpackFormat: integer
+        #          unit: Volts
+        #          rate: 5
+        #          scaling: 1.0
+        #          mqttSubTopic: voltage
 #
 #        - regType: holding
 #          addr: 1
