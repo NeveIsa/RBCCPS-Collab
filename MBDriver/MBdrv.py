@@ -75,6 +75,8 @@ def readReg(entry):
 
     if unpackFormat=="integer":
         dataValue = result.registers[0]
+        # dataValue = dataValue / scaling
+
     elif unpackFormat=="float":
         logging.error("In readReg --> unpackFormat - float : Not supported yet")
         return 
@@ -86,7 +88,8 @@ def readReg(entry):
 
 def writeReg(entry,data2write):
     devID,addr,devModbusEndianness,packFormat = entry["devID"],entry["addr"],entry["devModbusEndianness"],entry["packFormat"]
-    
+    scaling = entry["scaling"]
+
     if packFormat=="integer":
         pass
     elif packFormat=="float":
@@ -94,8 +97,10 @@ def writeReg(entry,data2write):
         return
 
     if type(data2write)==list:
+        # data2write = map(lambda x:x/scaling, data2write)
         print(client.write_registers(addr,data2write,unit=devID))
     elif type(data2write)==int:
+        # data2write = data2write/scaling
         print(client.write_register(addr,data2write,unit=devID))
     else:
         logging.error("In writeReg -> data2write must be of type list or int, found %s " % type(data2write))
