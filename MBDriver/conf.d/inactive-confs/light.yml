@@ -18,7 +18,7 @@ readRegs:
         - regType: holding
           addr: 0
           nRegs: 4
-          unpackFormat: integer
+          unpackFormat: int16
           unit: Volts
           rate: 10
           scaling: 1.0
@@ -27,7 +27,7 @@ readRegs:
         - regType: holding
           addr: 1
           nRegs: 5
-          unpackFormat: integer
+          unpackFormat: int16
           unit: Amps
           rate: 10
           scaling: 1.0
@@ -36,7 +36,7 @@ readRegs:
 writeRegs:
         - regType: holding
           addr: 0
-          packFormat: integer
+          packFormat: int16
           mqttSubTopic: blink
           scaling: 1.0
           rate: 0

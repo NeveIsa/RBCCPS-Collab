@@ -96,7 +96,16 @@ def mainLoadConfig():
             print(bcolors.WARNING + "--> Found modified" + bcolors.ENDC)
             if validateConfigFile(curFile):
                 print(bcolors.OKGREEN + "--> Valid Conf..." + bcolors.ENDC)
-                MODBUS_CONFIG[curFile]=readConfigFile(curFile)
+                conf_current = readConfigFile(curFile)
+                
+                print(bcolors.OKBLUE + "--> Conf state: " + conf_current["state"] + bcolors.ENDC)
+
+                if conf_current["state"]=="active":
+                    print(bcolors.WARNING + "-----> Loaded" + bcolors.ENDC)
+                    MODBUS_CONFIG[curFile] = conf_current
+                else:
+                    print(bcolors.WARNING + "-----> Ignored (state != active)")
+
             else:
                 print(bcolors.WARNING + "--> Invalid Conf... Ignoring" + bcolors.ENDC)
         

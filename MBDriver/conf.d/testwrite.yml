@@ -1,7 +1,7 @@
 name: lightSensor
 location: RBCCPS
 modbusDevID: 4
-state: inactive
+state: active
 priority: 1
 
 devIDRegister: 
@@ -36,7 +36,7 @@ devModbusEndianness:
 writeRegs:
         - regType: holding
           addr: 0
-          packFormat: integer
+          packFormat: int16
           mqttSubTopic: blink
           scaling: 1.0
           rate: 0

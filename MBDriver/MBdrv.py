@@ -61,6 +61,7 @@ def readReg(entry):
     
     devID,addr,nRegs,regType,devName,scaling,mqttSubTopic,unpackFormat,devModbusEndianness = entry["devID"],entry["addr"],entry["nRegs"],entry["regType"],entry["devName"],entry["scaling"],entry["mqttSubTopic"],entry["unpackFormat"],entry["devModbusEndianness"]
 
+
     if regType=="holding":
         result=client.read_holding_registers(addr,nRegs,unit=devID)                                    
     elif regType=="input":
@@ -73,6 +74,10 @@ def readReg(entry):
         logging.error ("Couldn't read register in function 'readReg' \n\t--> devID:%s  addr:%s  nRegs:%s  regType:%s" % (devID, addr, nRegs,regType))
         return None
 
+    # GET DEVICE ENDIANNESS
+    devByteEndianness = entry["devModbusEndianness"]["byte"]
+    devWordEndianness = entry["devModbusEndianness"]["word"]
+    
     if unpackFormat=="integer":
         dataValue = result.registers[0]
         # dataValue = dataValue / scaling

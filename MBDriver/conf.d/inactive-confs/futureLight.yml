@@ -4,7 +4,7 @@ modbusDevID: 2
 state: inactive
 priority: 1
 
-devIDRegister: int
+devIDRegister:
         addr: 200
         regType: holding
 
@@ -15,7 +15,7 @@ devModbusEndianness:
 readRegs:
         - regType: holding
           addr: 0
-          unpackFormat: integer
+          unpackFormat: int16
           unit: Volts
           rate: 100
           scaling: 1.0
@@ -24,7 +24,7 @@ readRegs:
         - regType: holding
           addr: 0
           nRegs: 5
-          unpackFormat: integer
+          unpackFormat: int16
           unit: Amps
           rate: 100
           scaling: 1.0
@@ -33,7 +33,7 @@ readRegs:
 writeRegs:
         - regType: input
           addr: 0
-          packFormat: integer
+          packFormat: int16
           mqttTopic: /hello/world
           scaling: 1.0
           rate: 200
