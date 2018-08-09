@@ -129,11 +129,30 @@ def data2registers(data, datatype, byteEndianness="big", wordEndianness="big"):
     return payload
 
 
-def registers2data(registers, datatype, no_of_data_points=1, byteEndianness="big", wordEndianness="big"):
+def registers2data(registers, datatype, no_of_data_points=0, byteEndianness="big", wordEndianness="big"):
     '''
+    
     Number of data points is the number of data units to decode, like how many int32 are present in the parameter registers
+
+    no_of_data_points=0,None,False means the number of registers will be automatically calculated from the no of items in the params 'registers' and 'datatype'
     
     '''
+
+
+    if not no_of_data_points:
+        """ Autodetect length"""
+
+        # modbus registers are 2 bytes long - 16 bits
+        no_bytes_reg = len(registers)*2 
+
+        if "8" in datatype: datatype_size = 1
+        elif "16" in datatype: datatype_size = 2
+        elif "32" in datatype: datatype_size = 4
+        elif "64" in datatype: datatype_size = 8
+
+        no_of_data_points = int(no_bytes_reg / datatype_size)
+        logging.info("--> Autodetected register decode size - nbytes_in_regs: %s, datatype_size: %s, no_of_data_points: %s" % (no_bytes_reg, datatype_size, no_of_data_points) )
+
 
     if byteEndianness=='big': bOrder = Endian.Big
     else: bOrder = Endian.Little
@@ -226,7 +245,7 @@ if __name__ == "__main__":
     logging.debug("loaded...")
 
 
-    drvConf["serialConf"]["baudrate"]=9600
+    #drvConf["serialConf"]["baudrate"]=9600
     drvConf["serialConf"]["timeout"]=0.1
 
     logging.info("Attempting : {}:{}".format(drvConf["serialConf"]["port"],drvConf["serialConf"]["baudrate"]))
@@ -248,7 +267,7 @@ if __name__ == "__main__":
             continue
         #sys.exit()
         
-        data = registers2data(result.registers,"float32",1,"big","big")
+        data = registers2data(result.registers,"float32",0,"big","big")
         print (result.registers,data)
 
 
@@ -258,7 +277,7 @@ if __name__ == "__main__":
             print("Failed modbus read")
             continue
         
-        data = registers2data(result.registers,"float32",1,"big","big")
+        data = registers2data(result.registers,"float32",0,"big","big")
         print (result.registers,data)
         
         exit()
