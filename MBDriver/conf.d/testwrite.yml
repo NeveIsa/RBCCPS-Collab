@@ -1,6 +1,6 @@
 name: lightSensor
 location: RBCCPS
-modbusDevID: 4
+modbusDevID: 2
 state: active
 priority: 1
 
@@ -8,21 +8,64 @@ devIDRegister:
         addr: 200
         regType: holding
 
-deviceMetaID: 4
+deviceMetaID: 123456789
 
 devModbusEndianness:
         word: big
         byte: big
 
-        #readRegs:
-        #        - regType: holding
-        #          addr: 0
-        #          nRegs: 1
-        #          unpackFormat: integer
-        #          unit: Volts
-        #          rate: 5
-        #          scaling: 1.0
-        #          mqttSubTopic: voltage
+readRegs:
+        - regType: input
+          addr: 3000
+          nRegs: 1
+          unpackFormat: uint16
+          unit: Celsius
+          rate: 1
+          scaling: 0.01831
+          mqttSubTopic: temperature
+
+        - regType: input
+          addr: 3001
+          nRegs: 1
+          unpackFormat: uint16
+          unit: Volts
+          rate: 1
+          scaling: 0.003706
+          mqttSubTopic: voltage
+
+        - regType: input
+          addr: 3002
+          nRegs: 1
+          unpackFormat: uint16
+          unit: Amps
+          rate: 1
+          scaling: 0.0013428
+          mqttSubTopic: current
+
+        - regType: input
+          addr: 3003
+          nRegs: 1
+          unpackFormat: uint16
+          unit: adc_raw
+          rate: 1
+          scaling: 1.0
+          mqttSubTopic: ldr
+
+        - regType: holding
+          addr: 3000
+          nRegs: 1
+          unpackFormat: uint16
+          unit: raw_adc
+          rate: 1
+          scaling: 1.0
+          mqttSubTopic: temperature_cpu
+
+
+
+
+
+
+
 #
 #        - regType: holding
 #          addr: 1
@@ -33,10 +76,11 @@ devModbusEndianness:
 #          scaling: 1.0
 #          mqttSubTopic: current
 #
-writeRegs:
-        - regType: holding
-          addr: 0
-          packFormat: int16
-          mqttSubTopic: blink
-          scaling: 1.0
-          rate: 0
+
+#writeRegs:
+#        - regType: holding
+#          addr: 0
+#          packFormat: int16
+#          mqttSubTopic: blink
+#          scaling: 1.0
+#          rate: 0

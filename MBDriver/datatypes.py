@@ -161,7 +161,7 @@ def registers2data(registers, datatype, no_of_data_points=0, byteEndianness="big
     else: wOrder = Endian.Little
     
     #decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=Endian.Little, wordorder=Endian.Little)
-    decoder = BinaryPayloadDecoder.fromRegisters(result.registers, byteorder=bOrder, wordorder=wOrder)
+    decoder = BinaryPayloadDecoder.fromRegisters(registers, byteorder=bOrder, wordorder=wOrder)
 
     # decoded = OrderedDict([
     # ('string', decoder.decode_string(8)),
@@ -257,32 +257,47 @@ if __name__ == "__main__":
     logging.info("Connected...")
 
 
-    for i in range(1000):
-        import time
-        #time.sleep(0.001)
-        result = client.read_holding_registers(0,2,unit=1)
 
-        if result.isError(): 
-            print("Failed modbus read")
-            continue
-        #sys.exit()
-        
-        data = registers2data(result.registers,"float32",0,"big","big")
-        print (result.registers,data)
+    import sys
+    if len(sys.argv) >1:
+        if "arduinotest" in sys.argv[1]:
+            for i in range(1000):
+                import time
+                #time.sleep(0.001)
+                result = client.read_holding_registers(0,2,unit=1)
 
-
-        result = client.read_holding_registers(2,2,unit=1)
-
-        if result.isError(): 
-            print("Failed modbus read")
-            continue
-        
-        data = registers2data(result.registers,"float32",0,"big","big")
-        print (result.registers,data)
-        
-        exit()
+                if result.isError(): 
+                    print("Failed modbus read")
+                    continue
+                #sys.exit()
+                
+                data = registers2data(result.registers,"float32",0,"big","big")
+                print (result.registers,data)
 
 
-       
+                result = client.read_holding_registers(2,2,unit=1)
+
+                if result.isError(): 
+                    print("Failed modbus read")
+                    continue
+                
+                data = registers2data(result.registers,"float32",0,"big","big")
+                print (result.registers,data)
+                
+                exit()
+
+
+    while True:
+        for addr in range(3):
+            result = client.read_input_registers(3000+addr,1,unit=1)
+            if result.isError(): print("Failed")
+            else: 
+                data = registers2data(result.registers,"uint16")
+                data = map(lambda x,y:x*y,data,[75/4096,15.18/4096,5.5/4096])
+                data = list(data)
+                print(result.registers,data,addr)
+                time.sleep(0.01)
+        time.sleep(2)
+        print("")
 
 

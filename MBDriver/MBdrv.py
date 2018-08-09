@@ -6,6 +6,9 @@ import loggingcolormod
 
 import time
 
+
+import datatypes
+
 with open("drvConf.yml") as f:
     logging.debug("Loading drvConf.yml")
     drvConf=yaml.load(f.read())
@@ -78,17 +81,23 @@ def readReg(entry):
     devByteEndianness = entry["devModbusEndianness"]["byte"]
     devWordEndianness = entry["devModbusEndianness"]["word"]
     
-    if unpackFormat=="integer":
-        dataValue = result.registers[0]
-        # dataValue = dataValue / scaling
+    # DECODE FROM REGISTERS
 
-    elif unpackFormat=="float":
-        logging.error("In readReg --> unpackFormat - float : Not supported yet")
-        return 
+    dataValues = datatypes.registers2data(result.registers,unpackFormat,0,devByteEndianness,devWordEndianness)
+    
+    #if failed to decode
+    if not dataValues:
+        return
+
+    # scale using scaling param
+    dataValues = map(lambda x:x*scaling,dataValues)
+    dataValues = list(dataValues)
 
     logging.info("In readReg -> %.3f | devID:%s addr:%s  nRegs:%s devName:%s regValues: %s mqttSubTopic:%s" % (time.time(),devID,addr,nRegs,devName,result.registers,mqttSubTopic))
+    
     subTopic="{}/{}".format(devName,mqttSubTopic)
-    device.reportSensorVal(subTopic,str(dataValue))
+    device.reportSensorVal(subTopic,str(dataValues))
+    
     return result.registers
 
 def writeReg(entry,data2write):
