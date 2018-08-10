@@ -19,7 +19,7 @@ void setup()
 {   
 
 //Assign the modbus device ID.  
-  regBank.setId(1);
+  regBank.setId(2);
 
 /*
 modbus registers follow the following format

@@ -64,6 +64,16 @@ devModbusEndianness:
                                 - little
 
 
+
+
+WriteMultipleRegistersFunctionSupport:
+        type: boolean
+        required: True
+        #default: False
+
+
+
+
 readRegs:
         type: list
         schema: 

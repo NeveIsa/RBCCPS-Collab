@@ -14,6 +14,11 @@ devModbusEndianness:
         word: big
         byte: big
 
+
+# If not sure, leave this field as false
+WriteMultipleRegistersFunctionSupport: False
+
+
 readRegs:
         - regType: input
           addr: 3000
@@ -60,7 +65,20 @@ readRegs:
           scaling: 1.0
           mqttSubTopic: temperature_cpu
 
+writeRegs:
+        - regType: holding
+          addr: 2000
+          packFormat: int16
+          mqttSubTopic: brightness_percent
+          scaling: 1.0
+          rate: 0
 
+        - regType: holding
+          addr: 1000
+          packFormat: int8
+          mqttSubTopic: vlc_data_string
+          scaling: 1.0
+          rate: 0
 
 
 
@@ -77,10 +95,4 @@ readRegs:
 #          mqttSubTopic: current
 #
 
-#writeRegs:
-#        - regType: holding
-#          addr: 0
-#          packFormat: int16
-#          mqttSubTopic: blink
-#          scaling: 1.0
-#          rate: 0
+

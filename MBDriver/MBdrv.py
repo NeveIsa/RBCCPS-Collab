@@ -87,6 +87,7 @@ def readReg(entry):
     
     #if failed to decode
     if not dataValues:
+        logging.error("In readReg -> Failed to convert using data2registers from datatypes.py module")
         return
 
     # scale using scaling param
@@ -100,27 +101,54 @@ def readReg(entry):
     
     return result.registers
 
-def writeReg(entry,data2write):
+def writeReg(entry,data2write,encode2registers=True):
+
+    """
+    encode2registers uses data2registers from datatypes module
+    If encode2registers set to false, the data2write values are not encoded using data2registers
+
+    """
+
     devID,addr,devModbusEndianness,packFormat = entry["devID"],entry["addr"],entry["devModbusEndianness"],entry["packFormat"]
     scaling = entry["scaling"]
 
-    if packFormat=="integer":
-        pass
-    elif packFormat=="float":
-        logging.error("In writeReg --> packFormat - float: Not supported yet...")
-        return
-
+    # GET DEVICE ENDIANNESS
+    devByteEndianness = entry["devModbusEndianness"]["byte"]
+    devWordEndianness = entry["devModbusEndianness"]["word"]
+    
+    
+    
     if type(data2write)==list:
-        # data2write = map(lambda x:x/scaling, data2write)
-        print(client.write_registers(addr,data2write,unit=devID))
-    elif type(data2write)==int:
-        # data2write = data2write/scaling
-        print(client.write_register(addr,data2write,unit=devID))
+        pass
     else:
-        logging.error("In writeReg -> data2write must be of type list or int, found %s " % type(data2write))
-        return
+        data2write = [data2write]
+   
 
-    logging.warning("In writeReg -> Writing to devID:%s addr:%s value(s):%s" % (devID,addr,data2write))
+    #data2write = map(lambda x:x/scaling, data2write)
+
+
+    if encode2registers:
+        _registers = datatypes.data2registers(data2write, packFormat, devByteEndianness, devWordEndianness)
+    else:
+        _registers = data2write
+
+
+    if not _registers:
+        logging.error("In readReg -> Failed to convert using registers2data from datatypes.py module")
+        return
+    
+    if len(_registers)==1:
+        result = client.write_register(addr, _registers[0], unit=devID)
+    else:
+        result = client.write_registers(addr, _registers, unit=devID)
+
+    
+    logging.warning(result)
+
+    if result.isError():
+        logging.warning("In writeReg -> Error writing to devID:%s addr:%s value(s):%s" % (devID,addr,data2write))
+    else:
+        logging.warning("In writeReg -> Wrote to devID:%s addr:%s value(s):%s" % (devID,addr,data2write))
 
 
 def subscribeIncomingSubTopic(subtopic):

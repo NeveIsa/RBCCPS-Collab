@@ -68,7 +68,7 @@ class Device:
 
     def on_message(self,client, userdata, msg):
         # The callback for when a PUBLISH message is received from the server.
-        logging.warning("In on_message -> Topic: %s | Message: %s" % (msg.topic,str(msg.payload)[:10]) )
+        logging.warning("In on_message -> Topic: %s | Message: %s" % (msg.topic,str(msg.payload)[:30]) )
         
         # Get subtopic
         subtopic = msg.topic.replace(self.actionListeningTopic+"/","")
