@@ -1,4 +1,4 @@
-name: lightSensor
+name: smartstreetlight
 location: RBCCPS
 modbusDevID: 2
 state: active

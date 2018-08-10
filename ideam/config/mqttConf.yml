@@ -1,0 +1,11 @@
+MQTT_HOST: localhost
+MQTT_PORT: 1883
+
+FORWARD_DOMAINS:
+  SENSE: sensed
+  LOG: deviceLog
+  MANAGEMENT: gwManager
+
+INCOMING_DOMAINS:
+  ACTION: deviceAction
+  MANAGEMENT: deviceManager
