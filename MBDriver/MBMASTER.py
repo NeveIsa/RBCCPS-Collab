@@ -129,7 +129,7 @@ while True:
 
             # load msg and check validity as array
             try:
-                message = json.loads(msg["message"])
+                message = json.loads(msg["message"].decode("utf8"))
                 assert(type(message)==list)
             except Exception as e:
                 logging.error("In MBMASTER --> Exception on loading json from msg OR asserting type(msg) as list: %s" % e)
