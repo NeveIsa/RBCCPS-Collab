@@ -1,0 +1,45 @@
+{
+    "ex-observation": {
+        "msgType": "observation",
+        "samplingInstant": "1937-01-01T12:00:27.87+00:20",
+        "messageID": 108,
+        "temperature": 35,
+        "current": 3.5,
+        "brightness": 99
+    },
+    "ex-actuation": {
+        "msgType": "actuation",
+        "commandInstant": "1937-01-01T12:00:27.87+00:20",
+        "messageID": 109,
+        "brightness": 99,
+        "vlcOn": false
+    },
+    "ex-actuation-response": {
+        "msgType": "response",
+        "responseInstant": "1937-01-01T12:00:27.87+00:20",
+        "messageID": 114,
+        "response": "brightness-set-99",
+        "responseType": "actuation",
+        "requestID": 112
+    },
+    "ex-management": {
+        "msgType": "management",
+        "requestInstant": "1937-01-01T12:00:27.87+00:20",
+        "messageID": 110,
+        "request": "start-modbus-discovery"
+    },
+    "ex-management-response": {
+        "msgType": "response",
+        "responseInstant": "1937-01-01T12:00:27.87+00:20",
+        "responseType": "management",
+        "messageID": 111,
+        "response": "discovered-deviceID-1",
+        "requestID": 110
+    },
+    "ex-solicitation": {
+        "msgType": "solicitation",
+        "solicitationInstant": "1937-01-01T12:00:27.87+00:20",
+        "messageID": 112,
+        "request": "new-modbus-device-discovered"
+    }
+}
