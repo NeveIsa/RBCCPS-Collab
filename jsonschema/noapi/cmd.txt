@@ -1,0 +1,2 @@
+curl -v http://localhost:8001/cat?id=idXYZ  -XPOST -H "Content-Type: application/json" -H "no-check:1" -H "pwd: local123" --data '
+'

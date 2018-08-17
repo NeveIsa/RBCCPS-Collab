@@ -1,0 +1,62 @@
+{
+  "refCatalogueSchema": "ip_camera_schema.json",
+  "id": "idXYZ",
+  "resourceType": "IP Camera",
+  "refCatalogueSchemaRelease":"latest_pre_rel",
+  "tags": [
+    "camera",
+    "surveillance",
+    "video analytics",
+    "images"
+  ],
+  "latitude": {
+    "value": 13.013965,
+    "ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "longitude": {
+    "value": 77.570504,
+    "ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "owner": {
+    "name": "IISC",
+    "website": "http://www.iisc.ac.in"
+  },
+  "provider": {
+    "name": "Robert Bosch Centre for Cyber Physical Systems, IISc",
+    "website": "http://rbccps.org"
+  },
+  "geoLocation": {
+    "indoor_location": {
+      "building_name": "Enterpreneurship Center",
+      "floor": "Terrace",
+      "address": "RBCCPS, IISC, Bangalore, 560012",
+      "poleId": "pole3"
+    }
+  },
+  "ipcameraInfo": {
+      "modelpartNum": "VIVOTEK IB8369",
+      "dataSheetURL": "http://download.vivotek.com/downloadfile/downloads/datasheets/ib8369datasheet_en.pdf",
+      "hasAudioCapability": false,
+      "hasONVIFCapability": true,
+      "hasWirelessCapability": false,
+      "cameraType": "fixed",
+      "cameraHousing": "bullet"
+  },
+  "subscriptionProtocols": "rtmp",
+  "storageFileFormats": "mp4",
+  "accessMechanism": {
+    "requestAccessSite": {
+      "describes": "URI for getting permissions to access the device", 
+      "value": "http://rbccps.org/middleware/requestAccess"
+    }, 
+    "subscriptionEndPoint": {
+       "value": "rtmp://10.156.14.206:1935/live1/idXYZ",
+       "describes": "Link to access live stream for this camera"
+    },
+    "accessEndPoint": {
+       "value": "http://10.156.14.206/archive/idXYZ/<file.mp4>",
+       "describes": "Link to access stored files for a given camera. <.../archive/idXYZ> lists all available files"
+    }
+  },
+  "data_schema": {}
+}

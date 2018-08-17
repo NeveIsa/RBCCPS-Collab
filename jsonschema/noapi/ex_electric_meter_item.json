@@ -1,0 +1,218 @@
+{
+  "refCatalogueSchema": "electric_meter_schema.json",
+  "id": "idXYZ",
+  "resourceType": "energymeter",
+  "refCatalogueSchemaRelease":"0.1.0",
+  "tags": [
+    "electric meter",
+    "Energy",
+    "HAVC"
+  ],
+  "loadtype": "AC",
+  "latitude": {
+    "value": 13.0143335,
+    "ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "longitude": {
+    "value": 77.5678424,
+    "ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "owner": {
+    "name": "IISC",
+    "website": "http://www.iisc.ac.in"
+  },
+  "provider": {
+    "name": "Robert Bosch Centre for Cyber Physical Systems, IISc",
+    "website": "http://rbccps.org"
+  },
+  "geoLocation": {
+    "indoor_location": {
+      "building_name": "Enterpreneurship Center",
+      "floor": "3rd Flr",
+      "room": "UPS Room",
+      "address": "RBCCPS, IISC, Bangalore, 560012"
+    }
+  },
+  "connection_topology": {
+    "is_site_meter": false,
+    "site_topology": "http://rbccps.org/resourceInfo/building/topology"
+  },
+  "accessMechanism": {
+    "requestAccessSite": {
+      "describes": "URI for getting permissions to access the device", 
+      "value": "http://rbccps.org/middleware/requestAccess"
+    }, 
+    "accessEndPoint": {
+       "value": "https://rbccps.org/middleware/api/{api_ver}/db",
+       "describes": "End point to access the archived values (database access endpoint)"
+    },
+    "subscriptionEndPoint": {
+       "value": "mqtt://rbccps.org/subscription/live",
+       "describes": "End point for subscribing to LIVE data"
+    },
+    "resourceAPIInfo": {
+       "value": "http://rbccps.org/resourceInfo/api",
+       "describes": "Information on how to use various APIs (access, update, cat) associated with this resource"
+    }
+  },
+  "data_schema": {
+    "type": "object",
+    "properties": {
+        "dataSamplingInstant": {
+          "type": "number",
+          "description": "Sampling Time in EPOCH format",
+          "units": "seconds",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "RPhaseVoltage": {
+          "type": "number",
+          "description": "",
+          "units": "volts",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "YPhaseVoltage": {
+          "type": "number",
+          "description": "",
+          "units": "volts",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "BPhaseVoltage": {
+          "type": "number",
+          "description": "",
+          "units": "volts",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "RPhaseCurrent": {
+          "type": "number",
+          "description": "",
+          "units": "amperes",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "YPhaseCurrent": {
+          "type": "number",
+          "description": "",
+          "units": "amperes",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "BPhaseCurrent": {
+          "type": "number",
+          "description": "",
+          "units": "amperes",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "RPhaseActivePower": {
+          "type": "number",
+          "description": "",
+          "units": "watts",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "RPhaseReactivePower": {
+          "type": "number",
+          "description": "",
+          "units": "voltage-ampere reactive",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "RPhaseApparentPower": {
+          "type": "number",
+          "description": "",
+          "units": "voltage-ampere",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "YPhaseActivePower": {
+          "type": "number",
+          "description": "",
+          "units": "watts",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "YPhaseReactivePower": {
+          "type": "number",
+          "description": "",
+          "units": "voltage-ampere reactive",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "YPhaseApparentPower": {
+          "type": "number",
+          "description": "",
+          "units": "voltage-ampere",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "BPhaseActivePower": {
+          "type": "number",
+          "description": "",
+          "units": "watts",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "BPhaseReactivePower": {
+          "type": "number",
+          "description": "",
+          "units": "voltage-ampere reactive",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "BPhaseApparentPower": {
+          "type": "number",
+          "description": "",
+          "units": "voltage-ampere",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "RPhasePowerFactor": {
+          "type": "number",
+          "description": "",
+          "units": "dimensionless",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "YPhasePowerFactor": {
+          "type": "number",
+          "description": "",
+          "units": "dimensionless",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "BPhasePowerFactor": {
+          "type": "number",
+          "description": "",
+          "units": "dimensionless",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "EnergyActive": {
+          "type": "number",
+          "description": "",
+          "units": "kilowatt-hour",
+          "permissions": "read",
+          "accessModifier": "public"
+        },
+        "EnergyReactive": {
+          "type": "number",
+          "description": "",
+          "units": "kVArh",
+          "permissions": "read",
+          "accessModifier": "public"
+        }
+    },
+    "additionalProperties": false
+  },
+  "serialization_from_device":{
+    "format": "json",
+    "schema_ref": {
+       "type": "json-schema draft 4",
+       "link": "#/data_schema"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+Onboarding to cat:
+
+----------------------
+Run onboard.sh <ID> <ex_ITEM> <Provider_API_Key>
+
+Example:
+./onboard.sh 70b3d58ff0031f00 ex_streetlight_item.json 3cd960633eed4f90b729eb72d235351a
+
+Note that in ex_ITEM.json (id should have idXYZ) and in cmd.txt file API Key should have apiXYZ
+
+After running above script a file "tmp.sh" will be created. Run tmp.sh to onboard in cat.
+-------------------------
+
+Credentials for provider rbccps
+username = RBCCPS
+key = beee69bb9d024fbf97800be726f85a57
+
+--------
+
+./delete.sh <item_ID> <password for delete>
+
+./onboard.sh <ID> <ex_ITEM> beee69bb9d024fbf97800be726f85a57
+
+#Registration for a camera 
+./register.sh <Provider_API_Key> <CameraID>
+
+Example
+./register.sh beee69bb9d024fbf97800be726f85a57 cam_0002d15aa905
+
+
+
+https://smartcity.rbccps.org/api/0.1.0/cat?tags=analytics&getOnly=inputResourceId,accessMechanism
+
+----
+Important
+-----
+For cameras, right now the schema ip_camera_schema.json has been copied explicitly into schemas/0.1.0 
+directory in the cat server.
+It's not a part of the release so it has to be copied separately. Whenever we move to a new cat, we
+need to copy that explicitly
+
+
+
+

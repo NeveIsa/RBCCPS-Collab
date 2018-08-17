@@ -1,0 +1,270 @@
+{
+  "refCatalogueSchema": "cdx_base_staticThing.json",
+  "id": "70b3d58ff0031f00",
+  "resourceType": "streetlight",
+  "tags": [
+    "onstreet",
+    "Energy",
+    "still under development!"
+  ],
+  "refCatalogueSchemaRelease":"0.1.0",
+  "latitude": {
+    "value": 13.0143335,
+    "ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "longitude": {
+    "value": 77.5678424,
+    "ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  },
+  "owner": {
+    "name": "IISC",
+    "website": "http://www.iisc.ac.in"
+  },
+  "provider": {
+    "name": "Robert Bosch Centre for Cyber Physical Systems, IISc",
+    "website": "http://rbccps.org"
+  },
+  "geoLocation": {
+    "address": "80 ft Road, Bangalore, 560012"
+  },
+  "accessMechanism": {
+    "accessEndPoint": {
+      "value": "https://smartcity.rbccps.org/api/0.1.0/historicData",
+      "describes": "End point to access the archived values (database access endpoint)"
+    },
+    "subscriptionEndPoint": {
+      "value": "https://smartcity.rbccps.org/api/0.1.0/subscribe",
+      "describes": "End point for subscribing to LIVE data"
+    },
+    "resourceAPIInfo": {
+      "value": "https://rbccps-iisc.github.io",
+      "describes": "Information on how to use various APIs (access, update, cat) associated with this resource"
+    }
+  },
+  "message_schemas": {
+     "type": "object",
+     "properties": {
+         "observation_msg": {
+             "$schema": "http://json-schema.org/draft-07/schema#",
+             "type": "object",
+             "describes": "Observation messages from the streetlight",
+             "direction": "fromThing",
+             "priority": "low",
+             "tags": ["onstreet sensors","energy"],
+             "sharing": "public",
+             "required": ["caseTemperature","dataSamplingInstant"],
+             "properties": {
+               "dataSamplingInstant": {
+                 "type": "number",
+                 "description": "Sampling Time in EPOCH format",
+                 "units": "seconds"
+               },
+               "caseTemperature": {
+                 "type": "number",
+                 "description": "Temperature of the device casing",
+                 "units": "degreeCelsius"
+               },
+               "powerConsumption": {
+                 "type": "number",
+                 "description": "Power consumption of the device",
+                 "units": "watts"
+               },
+               "luxOutput": {
+                 "type": "number",
+                 "description": "lux output of LED measured at LED",
+                 "units": "lux"
+               },
+               "ambientLux": {
+                 "type": "number",
+                 "description": "lux value of ambient",
+                 "units": "lux"
+               }
+            },
+            "additionalProperties": false
+           },
+           "controlParamsSetPoint_msg": {
+             "$schema": "http://json-schema.org/draft-07/schema#",
+             "type": "object",
+             "describes": "Observation messages from the streetlight",
+             "direction": "fromThing",
+             "priority": "low",
+             "tags": ["onstreet sensors","energy"],
+             "sharing": "protected",
+             "properties": {
+               "targetPowerState": {
+                 "type": "string",
+                 "enum": [
+                   "ON",
+                   "OFF"
+                 ],
+                 "units": "dimensionless",
+                 "description": "Power state of the device"
+               },
+               "targetControlPolicyParams": {
+                 "type": "object",
+                 "description": "Describes the values of control policy parameters",
+                 "properties": {
+                     "targetControlPolicy": {
+                     "enum": [
+                       "AUTO_TIMER",
+                       "AUTO_LUX",
+                       "MANUAL"
+                     ],
+                     "units": "dimensionless",
+                     "description": "Current value for the target Control Policy"
+                 }
+                },
+                "additionalProperties": false
+               },
+               "targetManualControlParams": {
+                 "type": "object",
+                 "description": "Describes the values of Manual control parameters",
+                 "properties": {
+                   "targetBrightnessLevel": {
+                   "type": "number",
+                   "description": "Value of brightness level [0-100]",
+                   "units": "percent"
+                   }
+                 },
+                 "additionalProperties": false
+               },
+               "targetAutoTimerParams": {
+                 "type": "object",
+                 "description": "Description of Auto Timer Parameters",
+                 "properties": {
+                   "targetOnTime": {
+                     "type": "number",
+                     "description": "Target time when the light switches ON under auto timer policy",
+                     "units": "seconds"
+                   },
+                   "targetOffTime": {
+                     "type": "number",
+                     "description": "Target time when the light switches OFF under auto timer policy",
+                     "units": "seconds"
+                   }
+                 },
+                 "additionalProperties": false
+               },
+               "targetAutoLuxParams": {
+                 "type": "object",
+                 "description": "Description of Auto Lux Parameters",
+                 "properties": {
+                   "targetOnLux": {
+                     "type": "number",
+                     "description": "Target ambient LUX value below which the light switches ON under auto lux policy",
+                     "units": "lux"
+                   },
+                   "targetOffLux": {
+                     "type": "number",
+                     "description": "Target ambient LUX value above which the light switches OFF under auto lux policy",
+                     "units": "lux"
+                   }
+                 },
+                 "additionalProperties": false
+               }
+            },
+            "additionalProperties": false
+         },
+         "control_msg": {
+             "$schema": "http://json-schema.org/draft-07/schema#",
+             "type": "object",
+             "describes": "Observation messages from the streetlight",
+             "direction": "toThing",
+             "priority": "low",
+             "tags": ["onstreet sensors","energy"],
+             "sharing": "protected",
+             "properties": {
+               "targetPowerState": {
+                 "type": "string",
+                 "enum": [
+                   "ON",
+                   "OFF"
+                 ],
+                 "units": "dimensionless",
+                 "description": "If set to ON, turns ON the device. If OFF turns OFF the device. Writeable parameter. Writeable only allowed for authorized apps"
+               },
+               "targetControlPolicyParams": {
+                 "type": "object",
+                 "description": "Describes the values of control policy parameters",
+                 "properties": {
+                     "targetControlPolicy": {
+                     "enum": [
+                       "AUTO_TIMER",
+                       "AUTO_LUX",
+                       "MANUAL"
+                     ],
+                     "units": "dimensionless",
+                     "description": "Indicates which of the behaviours the device should implement. AUTO_TIMER is timer based, AUTO_LUX uses ambient light and MANUAL is controlled by app."
+                 }
+                },
+                "additionalProperties": false
+               },
+               "targetManualControlParams": {
+                 "type": "object",
+                 "description": "Describes the values of Manual control parameters",
+                 "properties": {
+                   "targetBrightnessLevel": {
+                   "type": "number",
+                   "description": "Number between 0 to 100 to indicate the percentage brightness level.",
+                   "units": "percent"
+                   }
+                 },
+                 "additionalProperties": false
+               },
+               "targetAutoTimerParams": {
+                 "type": "object",
+                 "description": "Description of Auto Timer Parameters",
+                 "properties": {
+                   "targetOnTime": {
+                     "type": "number",
+                     "description": "Indicates time of day in seconds from 12 midnight when device turns ON in AUTO_TIMER.",
+                     "units": "seconds"
+                   },
+                   "targetOffTime": {
+                     "type": "number",
+                     "description": "Indicates time of day in seconds from 12 midnight when device turns OFF in AUTO_TIMER.",
+                     "units": "seconds"
+                   }
+                 },
+                 "additionalProperties": false
+               },
+               "targetAutoLuxParams": {
+                 "type": "object",
+                 "description": "Description of Auto Lux Parameters",
+                 "properties": {
+                   "targetOnLux": {
+                     "type": "number",
+                     "description": "Indicates ambient lux when device turns ON in AUTO_LUX.",
+                     "units": "lux"
+                   },
+                   "targetOffLux": {
+                     "type": "number",
+                     "description": "Indicates ambient lux when device turns OFF in AUTO_LUX.",
+                     "units": "lux"
+                   }
+                 },
+                 "additionalProperties": false
+               }
+            },
+            "additionalProperties": false
+         }
+      },
+      "additionalProperties": false
+  },
+  "serialization_from_device": {
+    "format": "protocol-buffers",
+    "schema_ref": {
+      "type": "proto 2",
+      "mainMessageName": "sensor_values",
+      "link": "https://raw.githubusercontent.com/rbccps-iisc/applications-streetlight/master/proto_stm/txmsg/sensed.proto"
+    }
+  },
+  "serialization_to_device": {
+    "format": "protocol-buffers",
+    "schema_ref": {
+      "type": "proto 2",
+      "mainMessageName": "targetConfigurations",
+      "link": "https://raw.githubusercontent.com/rbccps-iisc/applications-streetlight/master/proto_stm/rxmsg/actuated.proto"
+    }
+  }
+}

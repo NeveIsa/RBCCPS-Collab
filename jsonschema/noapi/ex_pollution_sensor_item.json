@@ -1,0 +1,105 @@
+{
+	"refCatalogueSchema": "generic_iotdevice_schema.json",
+	"id": "idXYZ",
+	"resourceType": "pollution",
+	"tags": [
+		"co2",
+		"pm2.5",
+		"pm10",
+		"noise"
+	],
+	"refCatalogueSchemaRelease": "latest_pre_rel",
+	"latitude": {
+		"value": 13.012230, 
+		"ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+	},
+	"longitude": {
+		"value": 77.569135,
+		"ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+	},
+	"owner": {
+		"name": "IISC",
+		"website": "http://www.iisc.ac.in"
+	},
+	"provider": {
+		"name": "Robert Bosch Centre for Cyber Physical Systems, IISc",
+		"website": "http://rbccps.org"
+	},
+	"geoLocation": {
+		"address": "80 ft Road, Bangalore, 560012"
+	},
+	"accessMechanism": {
+		"requestAccessSite": {
+			"describes": "URI for getting permissions to access the device",
+			"value": "http://rbccps.org/middleware/requestAccess"
+		},
+		"accessEndPoint": {
+			"value": "https://rbccps.org/middleware/api/{api_ver}/db",
+			"describes": "End point to access the archived values (database access endpoint)"
+		},
+		"subscriptionEndPoint": {
+			"value": "mqtt://rbccps.org/subscription/live",
+			"describes": "End point for subscribing to LIVE data"
+		},
+		"additionalResourceInfo": {
+			"value": "http://rbccps.org/resourceInfo/{id}",
+			"describes": "Additional information about the device"
+		},
+		"resourceAPIInfo": {
+			"value": "http://rbccps.org/resourceInfo/api",
+			"describes": "Information on how to use various APIs (access, update, cat) associated with this resource"
+		}
+	},
+	"data_schema": {
+		"type": "object",
+		"properties": {
+			"timestamp": {
+				"type": "number",
+				"description": "Sampling Time in EPOCH format",
+				"units": "seconds",
+				"permissions": "read",
+				"accessModifier": "public"
+			},
+			"PM2_5": {
+				"type": "number",
+				"description": "PM2.5 level in ug/meter^3",
+				"units": "ug/Meter^3",
+				"permissions": "read",
+				"accessModifier": "public"
+			},
+			"PM10": {
+				"type": "number",
+				"description": "PM10 level in ug/meter^3",
+				"units": "ug/Meter^3",
+				"permissions": "read",
+				"accessModifier": "public"
+			},
+			"NOISELEVEL": {
+				"type": "number",
+				"description": "Ambient noise level in dBA",
+				"units": "dBA",
+				"permissions": "read",
+				"accessModifier": "public"
+			},
+
+			"CO2": {
+				"type": "number",
+				"description": "Ambient CO2 level in ppm",
+				"units": "ppm",
+				"permissions": "read",
+				"accessModifier": "public"
+			}
+
+		},
+		"additionalProperties": false
+	},
+	"serialization_from_device": {
+		"format": "protocol-buffers",
+		"schema_ref": {
+			"type": "proto 2",
+			"mainMessageName": "pollution",
+			"link": "https://raw.githubusercontent.com/mukuntharun/flowsensor/master/protos/sensed.proto"
+		}
+	}
+
+}

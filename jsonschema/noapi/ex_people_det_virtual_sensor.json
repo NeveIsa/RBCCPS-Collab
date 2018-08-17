@@ -1,0 +1,64 @@
+{
+  "refCatalogueSchema": "virtual_iotdevice_schema.json",
+  "id": "idXYZ",
+  "describes": "Detects instantaneous number of people in the field of view of the associated camera. Samples the input video stream at periodic intervals and makes a decision about the number of people present in a given frame.",
+  "resourceType": "Video Analytics Virtual Sensor",
+  "tags": [
+    "video analytics",
+    "person detector",
+    "people counting",
+    "virtual sensor"
+  ],
+  "refCatalogueSchemaRelease":"latest_pre_rel",
+  "owner": {
+    "name": "IISC",
+    "website": "http://www.iisc.ac.in"
+  },
+  "provider": {
+    "name": "Robert Bosch Centre for Cyber Physical Systems, IISc",
+    "website": "http://rbccps.org"
+  },
+  "isVirtualSensor": true,
+  "inputResourceId": ["cam_0002d13e3f01"], 
+  "accessMechanism": {
+    "accessEndPoint": {
+       "value": "https://smartcity.rbccps.org/api/0.1.0/historicData",
+       "describes": "End point to access the archived values (database access endpoint)"
+    },
+    "subscriptionEndPoint": {
+       "value": "https://smartcity.rbccps.org/api/0.1.0/subscribe",
+       "describes": "End point for subscribing to LIVE data"
+    },
+    "resourceAPIInfo": {
+       "value": "https://rbccps-iisc.github.io",
+       "describes": "Information on how to use various APIs (access, update, cat) associated with this resource"
+    }
+  },
+  "data_schema": {
+    "type": "object",
+    "properties": {
+        "count" : {
+          "type" : "number",
+          "description" : "Instantaneous number of people detected in the field of view of the camera",
+          "units" : "dimensionless",
+          "permissions" : "read",
+          "accessModifier": "public" 
+         },
+	"timestamp" : {
+          "type" : "number",
+          "description" : "Epoch value (in ms)",
+          "units" : "ms (since 1970)",
+          "permissions" : "read",
+          "accessModifier": "public"
+         }
+    },
+    "additionalProperties": false
+  },
+  "serialization_from_device":{
+    "format": "json",
+    "schema_ref": {
+       "type": "json-schema draft 4",
+       "link": "#/data_schema"
+    }
+  }
+}
