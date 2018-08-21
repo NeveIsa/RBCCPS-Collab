@@ -1,0 +1,19 @@
+{
+    "observationExample" : {
+        "messageType": "observation",
+          "timestamp":"1937-01-01T12:00:27.87+00:20",
+          "messageID": 101,
+          "temperature": 31.09,
+          "current": 2.3,
+          "brightness": 40
+    },
+
+    "actuationExample" : {
+        "messageType": "actuation",
+          "timestamp":"1937-01-01T12:00:27.87+00:20",
+          "messageID": 101,
+          "brightness": 40
+    }
+
+
+}
