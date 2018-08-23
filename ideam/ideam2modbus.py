@@ -16,8 +16,13 @@ def decode_msg_and_publish(msg):
     try:
         msg = msg.decode("utf")
         msg=json.loads(msg)
-        if "temperature" in msg:
-            client.publish("paho/temperature", 1)
+        if "brightness" in msg:
+            topic="deviceAction/modbus/brightness_percent"
+
+        client.publish(topic,str([msg["brightness"]]))
+
+    except Exception as e:
+        logging.error("In decode_msg_and_publish -> Exception: %s" e)
 
     
 
