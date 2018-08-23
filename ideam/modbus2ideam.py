@@ -139,4 +139,5 @@ if __name__ == "__main__":
             mqttmsg=manager.messageGet()
             logging.info(mqttmsg)
             msg=m.create(mqttmsg)
+            logging.error(msg)
             #icdev.publish("cityssl.private",json.dumps(msg))
