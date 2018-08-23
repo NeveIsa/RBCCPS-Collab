@@ -137,6 +137,6 @@ if __name__ == "__main__":
     while True:
         if manager.messageInwaiting():
             mqttmsg=manager.messageGet()
-            logging.error(mqttmsg)
-            #msg=m.create(mqttmsg)
+            logging.info(mqttmsg)
+            msg=m.create(mqttmsg)
             #icdev.publish("cityssl.private",json.dumps(msg))
