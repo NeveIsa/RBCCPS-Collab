@@ -65,6 +65,7 @@ class Device(object):
            logging.warning("Device.publish -> %s" % status)
         else:
             logging.warning("Device.publish -> Failed with HTTP code: %s" % status)
+            logging.info(result.text)
         
         return result
 
