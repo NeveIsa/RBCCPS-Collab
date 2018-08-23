@@ -54,7 +54,7 @@ readRegs:
           unit: adc_raw
           rate: 1
           scaling: 1.0
-          mqttSubTopic: brightness  #LDR output
+          mqttSubTopic: ldr
 
         - regType: holding
           addr: 3000
@@ -79,22 +79,6 @@ writeRegs:
           mqttSubTopic: vlc_data_string
           scaling: 1.0
           rate: 0
-          
-        - regType: holding
-          addr: 4000
-          packFormat: int8
-          mqttSubTopic: lamp_status
-          scaling: 1.0
-          rate: 0
-
-        - regType: holding
-          addr: 4001
-          packFormat: int8
-          mqttSubTopic: vlc_status
-          scaling: 1.0
-          rate: 0
-
-
 
 
 
