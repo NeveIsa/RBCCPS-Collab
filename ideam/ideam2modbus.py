@@ -22,7 +22,7 @@ def decode_msg_and_publish(msg):
         client.publish(topic,str([msg["brightness"]]))
 
     except Exception as e:
-        logging.error("In decode_msg_and_publish -> Exception: %s" e)
+        logging.error("In decode_msg_and_publish -> Exception: %s" % e)
 
     
 
