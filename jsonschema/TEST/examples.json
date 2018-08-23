@@ -4,8 +4,10 @@
           "timestamp":"1937-01-01T12:00:27.87+00:20",
           "messageID": 101,
           "temperature": 31.09,
+          "voltage": 12.5,
           "current": 2.3,
-          "brightness": 40
+          "brightness": 40,
+          "temperature_cpu": 30.9
     },
 
     "actuationExample" : {

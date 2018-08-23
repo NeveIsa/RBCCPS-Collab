@@ -55,8 +55,8 @@
           "temperature",
           "observation",
           "brightness",
+          "voltage",
           "current",
-          "power"
         ],
         "additionalProperties": false,
         "required": [
@@ -86,6 +86,11 @@
             "units": "centigrade",
             "description": "case temperature"
           },
+          "voltage": {
+            "type": "number",
+            "units": "Volts",
+            "description": "LED voltage"
+          },
           "current": {
             "type": "number",
             "units": "Amps",
@@ -97,6 +102,11 @@
             "minimum": 0,
             "maximum": 100,
             "description": "Lamp brightness in percent"
+          },
+          "temperature_cpu": {
+            "type": "number",
+            "units": "centigrade",
+            "description": "TIVA internal temperature"
           }
         }
       },
