@@ -130,8 +130,13 @@ if __name__ == "__main__":
     manager = Manager("modbus")
     manager.setup()
     manager.startListening()
+    
+    import message
+    m = message.Message()
+    
     while True:
         if manager.messageInwaiting():
-            msg=manager.messageGet()
-            logging.error(msg)
-            icdev.publish("cityssl.private",json.dumps([str(msg["subtopic"]),str(msg["message"])]))
+            mqttmsg=manager.messageGet()
+            logging.error(mqttmsg)
+            msg=m.create(mqttmsg)
+            icdev.publish("cityssl.private",json.dumps(msg))
