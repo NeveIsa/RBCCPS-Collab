@@ -138,6 +138,10 @@ if __name__ == "__main__":
         if manager.messageInwaiting():
             mqttmsg=manager.messageGet()
             logging.info(mqttmsg)
-            msg=m.create(mqttmsg)
+            
+            key = mqttmsg["subtopic"].split("/")[-1]
+            message = str(mqttmsg["message"])
+
+            msg=m.create({key:message})
             logging.error(msg)
             #icdev.publish("cityssl.private",json.dumps(msg))
