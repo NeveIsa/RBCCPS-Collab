@@ -7,7 +7,7 @@ import pika
 
 
 
-client =mqtt.Client(client_name)
+client =mqtt.Client()
 connect(host, port=1883, keepalive=60, bind_address="")
 client.connect("localhost", 1883, 60)
 client.loop_start()
