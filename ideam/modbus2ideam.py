@@ -140,7 +140,7 @@ if __name__ == "__main__":
             logging.info(mqttmsg)
             
             key = mqttmsg["subtopic"].split("/")[-1]
-            message = str(mqttmsg["message"])
+            message = str(mqttmsg["message"]).encode("utf8")
 
             msg=m.create({key:message})
             logging.error(msg)
