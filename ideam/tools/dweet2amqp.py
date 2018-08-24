@@ -12,6 +12,7 @@ while 1:
           print("Stale value: %s" % val)
           continue
       print (time.time(), val)
+      lastVal = val
       import os
       os.system("python3 rabbit_pub.py %s" % val)
     except Exception as e:
