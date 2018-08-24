@@ -56,9 +56,12 @@ class Device(object):
         logging.info("Device.__init__ -> device instantiated with apikey: %s" % self.devApiKey)
 
     def publish(self,exchange,data):
-        headers = {"Cache-Control": "no-cache","apikey": self.devApiKey}
-        jayload={"exchange":exchange,"body":data}
-        result=requests.post(server.publishUrl(),headers=headers,json=jayload)
+        headers = {"Cache-Control": "no-cache","apikey": self.devApiKey,'routingKey':'#'}
+        
+        #jayload={"exchange":exchange,"body":data}
+        #result=requests.post(server.publishUrl(),headers=headers,json=jayload)
+        
+        result=requests.post("{}/{}".format(server.publishUrl(),exchange),headers=headers,json=data)
         ok,status = self.helper.checkHTTPResponse(result)
        
         if ok:
