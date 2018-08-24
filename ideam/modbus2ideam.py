@@ -143,7 +143,7 @@ if __name__ == "__main__":
             message = json.loads(mqttmsg["message"].decode("utf"))[0]
 
             msg=m.create({key:message})
-            logging.error(msg)
+            logging.error("Received: %s" % msg)
             try:
                 icdev.publish("cityssl.private",json.dumps(msg))
             except Exception as e:
