@@ -125,6 +125,15 @@ class Manager(object):
         return self.msgQueue.get()
 
 
+def publish():
+    try:
+        icdev.publish("cityssl.private",json.dumps(msg))
+    except Exception as e:
+        logging.error("Failed to publish to IDEAM: %s" % e)
+
+    import requests
+    requests.get("https://dweet.io/dweet/for/cityssl",params=msg)
+
 
 if __name__ == "__main__":
     manager = Manager("modbus")
@@ -144,11 +153,5 @@ if __name__ == "__main__":
 
             msg=m.create({key:message})
             logging.error("Received: %s" % msg)
-            try:
-                icdev.publish("cityssl.private",json.dumps(msg))
-            except Exception as e:
-                logging.error("Failed to publish to IDEAM: %s" % e)
 
-            import requests
-            requests.get("https://dweet.io/dweet/for/cityssl",params=msg)
-
+            pool.apply_async(publish, ())
