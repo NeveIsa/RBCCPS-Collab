@@ -32,9 +32,9 @@ class Server(object):
         self.relativeApiBase = relative_api_base_url
 
         if port:
-            self.baseUrl = "http://{}:{}/{}".format(self.host,self.port,self.relativeApiBase)
+            self.baseUrl = "https://{}:{}/{}".format(self.host,self.port,self.relativeApiBase)
         else:
-            self.baseUrl = "http://{}/{}".format(self.host,self.relativeApiBase)
+            self.baseUrl = "https://{}/{}".format(self.host,self.relativeApiBase)
 
         logging.info("Server.__init__ -> baseUrl: %s" % self.baseUrl)
 
