@@ -144,7 +144,7 @@ if __name__ == "__main__":
 
             msg=m.create({key:message})
             logging.error(msg)
-            #icdev.publish("cityssl.private",json.dumps(msg))
+            icdev.publish("cityssl.private",json.dumps(msg))
             import requests
             requests.get("https://dweet.io/dweet/for/cityssl",params=msg)
 
