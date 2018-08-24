@@ -1,6 +1,9 @@
 import signal,sys,time
 import json
 
+from multiprocessing.dummy import Pool
+pool = Pool(16)
+
 def signal_handler(signal, frame):
         print('Exiting gracefully...')
         time.sleep(0.5)
