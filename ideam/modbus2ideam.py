@@ -144,7 +144,11 @@ if __name__ == "__main__":
 
             msg=m.create({key:message})
             logging.error(msg)
-            icdev.publish("cityssl.private",json.dumps(msg))
+            try:
+                icdev.publish("cityssl.private",json.dumps(msg))
+            except Exception as e:
+                logging.error("Failed to publish to IDEAM: %s" % e)
+
             import requests
             requests.get("https://dweet.io/dweet/for/cityssl",params=msg)
 

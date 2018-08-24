@@ -61,7 +61,7 @@ class Device(object):
         #jayload={"exchange":exchange,"body":data}
         #result=requests.post(server.publishUrl(),headers=headers,json=jayload)
         
-        result=requests.post("{}/{}".format(server.publishUrl(),exchange),headers=headers,json=data)
+        result=requests.post("{}/{}".format(server.publishUrl(),exchange),headers=headers,json=data,verify=False)
         ok,status = self.helper.checkHTTPResponse(result)
        
         if ok:
