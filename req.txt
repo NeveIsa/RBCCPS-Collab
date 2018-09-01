@@ -1,7 +1,7 @@
 Cerberus
 coloredlogs
-elasticsearch
-es2csv:
+#elasticsearch
+#es2csv:
 paho-mqtt
 pika
 pymodbus
@@ -10,5 +10,5 @@ python-utils
 PyYAML
 requests
 six
-sshuttle
+#sshuttle
 urllib3
