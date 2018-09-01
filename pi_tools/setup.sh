@@ -20,26 +20,25 @@ sudo service mosquitto start
 
 cd RBCCPS-Collab
 git pull
-
+cd ..
 
 echo "PWD: `pwd`"
-
 
 cat req.txt
 pip install -r req.txt
 pip3 install -r req.txt
 
 
-cd ~
-cp RBCCPS-Collab/pi_tools/begin.sh ~
+
+cp RBCCPS-Collab/pi_tools/begin.sh .
 
 
 crontab -l > crontab.tmp
-echo "@reboot /home/pi/begin.sh" >> crontab.tmp
+echo "@reboot `realpath begin.sh`" >> crontab.tmp
 crontab crontab.tmp
 
 
-cd RBCCPS-Collab/tinc/tinc_conf/
+cd RBCCPS-Collab/tinc/tinc_conf
 
 echo ""
 echo "*************************"
@@ -50,6 +49,8 @@ sleep 3
 
 nano Makefile
 make
+
+cd ../../..
 
 #deactivate
 
