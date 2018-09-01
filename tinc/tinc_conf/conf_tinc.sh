@@ -9,14 +9,14 @@ TINC_CLOUD_SERVER_USER=root
 TINC_CLOUD_SERVER_IP=ideam
 TINC_CLOUD_SERVER_NET_NAME=netname
 
-TINC_CLOUD_SERVER_TINC_DIR="~/test/tinc/"
+TINC_CLOUD_SERVER_TINC_DIR="~/test/tinc"
 TINC_CLOUD_SERVER_NET_NAME_DIR="$TINC_CLOUD_SERVER_TINC_DIR/$TINC_CLOUD_SERVER_NET_NAME"
 
 
 NODE_NAME=$(hostname)
 
 
-TINC_DIR="test/tinc"
+TINC_DIR="/etc/tinc"
 NET_NAME=netname
 NET_NAME_DIR="$TINC_DIR/$NET_NAME"
 
@@ -58,7 +58,7 @@ chmod 755 $NET_NAME_DIR/tinc-*
 
 
 #Run key gen
-#sudo tinc -n $NET_NAME -K4096
+sudo tinc -n $NET_NAME -K4096
 
 
 
