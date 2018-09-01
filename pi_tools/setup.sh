@@ -39,6 +39,6 @@ echo "@reboot /home/pi/begin.sh" >> crontab.tmp
 crontab crontab.tmp
 
 
-deactivate
+#deactivate
 
 
