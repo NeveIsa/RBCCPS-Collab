@@ -78,7 +78,7 @@ scp -P5151 $NET_NAME_DIR/hosts/$NODE_NAME richard@smartcity.rbccps.org:~/TINC_NO
 
 
 echo "*******************************************************************************"
-echo "$NODE_NAME"
+echo "NODE_NAME: $NODE_NAME"
 echo "*******************************************************************************"
 
 cat $NET_NAME_DIR/hosts/$NODE_NAME
