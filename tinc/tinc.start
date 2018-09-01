@@ -1,0 +1,4 @@
+#!/bin/bash
+screen -S tinc sudo tincd -n netname -D -d3
+
+#  press CTRL-\ to stop
