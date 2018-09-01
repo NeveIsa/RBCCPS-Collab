@@ -91,5 +91,5 @@ echo "**************************************************************************
 
 #copy to IDEAM server via RICHARD
 echo "UPLOADING KEY TO IDEAM"
-ssh -p5151 richard@smartcity.rbccps.org cd TINC_NODE_KEYS && ./.upload
+ssh -p5151 richard@smartcity.rbccps.org "cd TINC_NODE_KEYS && ./.upload"
 
