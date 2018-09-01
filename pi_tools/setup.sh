@@ -20,14 +20,11 @@ sudo service mosquitto start
 
 cd RBCCPS-Collab
 git pull
-cd ..
-
 echo "PWD: `pwd`"
-
 cat req.txt
 pip install -r req.txt
 pip3 install -r req.txt
-
+cd ..
 
 
 cp RBCCPS-Collab/pi_tools/begin.sh .
