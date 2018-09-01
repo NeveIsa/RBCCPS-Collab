@@ -31,7 +31,7 @@ cp RBCCPS-Collab/pi_tools/begin.sh .
 
 
 crontab -l > crontab.tmp
-echo "@reboot `realpath begin.sh`" >> crontab.tmp
+echo "@reboot cd `pwd` && ./begin.sh" >> crontab.tmp
 crontab crontab.tmp
 
 
