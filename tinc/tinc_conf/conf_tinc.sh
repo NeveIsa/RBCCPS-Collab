@@ -72,9 +72,11 @@ echo -e "\n" >> $NET_NAME_DIR/hosts/$TINC_CLOUD_SERVER_NODE_NAME
 
 #copy local to server
 #scp $NET_NAME_DIR/hosts/$NODE_NAME $TINC_CLOUD_SERVER_USER@$TINC_CLOUD_SERVER_IP:$TINC_CLOUD_SERVER_NET_NAME_DIR/hosts/
+scp -P5151 $NET_NAME_DIR/hosts/$NODE_NAME richard@smartcity.rbccps.org:~/TINC_NODE_KEYS/
 
 
 echo "*******************************************************************************"
+echo "$NODE_NAME"
 echo "*******************************************************************************"
 
 cat $NET_NAME_DIR/hosts/$NODE_NAME
