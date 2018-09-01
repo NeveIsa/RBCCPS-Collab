@@ -51,7 +51,7 @@ ConnectTo = $TINC_CLOUD_SERVER_NODE_NAME" > "$NET_NAME_DIR/tinc.conf"
 echo "Subnet = $TINC_SUBNET_IP/32" > "$NET_NAME_DIR/hosts/$NODE_NAME"
 
 
-echo "ifconfig \$INTERFACE $TINC_IP netmask $TINC_SUBNET_MASK_EXPANDED" > "$NET_NAME_DIR/tinc-up"
+echo "ifconfig \$INTERFACE $TINC_SUBNET_IP netmask $TINC_SUBNET_MASK_EXPANDED" > "$NET_NAME_DIR/tinc-up"
 echo "ifconfig \$INTERFACE down" > "$NET_NAME_DIR/tinc-down"
 
 chmod 755 $NET_NAME_DIR/tinc-*
