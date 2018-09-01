@@ -58,7 +58,7 @@ chmod 755 $NET_NAME_DIR/tinc-*
 
 
 #Run key gen
-sudo tinc -n $NET_NAME -K4096
+tincd -n $NET_NAME -K4096
 
 
 
