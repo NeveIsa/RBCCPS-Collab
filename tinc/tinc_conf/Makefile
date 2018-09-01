@@ -1,7 +1,7 @@
 default: tinc
 
 clean:
-	sudo rm -rf test
+	sudo rm -rf /etc/tinc/netname
 
 tinc: clean
 	#export TINC_SUBNET_IP=10.0.0.222
