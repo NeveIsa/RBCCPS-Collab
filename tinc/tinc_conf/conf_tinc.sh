@@ -38,7 +38,9 @@ TINC_SUBNET="$TINC_SUBNET_IP/$TINC_SUBNET_MASK"
 
 mkdir -p "$NET_NAME_DIR/hosts"
 
-echo "$NET_NAME" >> "$TINC_DIR/nets.boot"
+
+mv "$TINC_DIR/nets.boot" "$TINC_DIR/nets.boot.bak"
+echo "$NET_NAME" > "$TINC_DIR/nets.boot"
 
 
 echo "Name = $NODE_NAME
