@@ -22,3 +22,12 @@
 [1;30mINFO[0m Attempting : /dev/ttyUSB0:19200
 [1;30mERROR[0m [31m[Errno 2] could not open port /dev/ttyUSB0: [Errno 2] No such file or directory: '/dev/ttyUSB0'[0m
 [1;30mERROR[0m [31mCould not connect to serial port... Exiting[0m
+[1;30mERROR[0m [31mIn setup(services.py) --> Couldn't connect to MQTT Broker.[0m
+[1;30mERROR[0m [31mIn setup(services.py) --> Couldn't connect to MQTT Broker.[0m
+[1;30mERROR[0m [31mIn setup(services.py) --> Couldn't connect to MQTT Broker.[0m
+Traceback (most recent call last):
+  File "MBMASTER.py", line 11, in <module>
+    import logging,loggingcolormod
+  File "/home/pi/RBCCPS-Collab/MBDriver/loggingcolormod.py", line 1, in <module>
+    import coloredlogs
+ImportError: No module named 'coloredlogs'

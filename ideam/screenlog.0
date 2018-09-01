@@ -192,3 +192,63 @@ Traceback (most recent call last):
   File "/home/pi/.local/lib/python3.5/site-packages/pika/connection.py", line 1837, in _on_connection_error
     self.params.connection_attempts)
 pika.exceptions.AMQPConnectionError: (-1, "ConnectionResetError(104, 'Connection reset by peer')")
+Traceback (most recent call last):
+  File "ideam2modbus.py", line 11, in <module>
+    client.connect("localhost", 1883, 60)
+  File "/home/pi/.local/lib/python3.5/site-packages/paho/mqtt/client.py", line 768, in connect
+    return self.reconnect()
+  File "/home/pi/.local/lib/python3.5/site-packages/paho/mqtt/client.py", line 895, in reconnect
+    sock = socket.create_connection((self._host, self._port), source_address=(self._bind_address, 0))
+  File "/usr/lib/python3.5/socket.py", line 712, in create_connection
+    raise err
+  File "/usr/lib/python3.5/socket.py", line 703, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+[1;30mINFO[0m Server.__init__ -> baseUrl: https://ideam:8443/api/1.0.0
+[1;30mINFO[0m Loaded device -> cityssl
+[1;30mINFO[0m Device.__init__ -> device instantiated with apikey: eXONzytcviiloR9v4k1Q7KyRmLdBBiTWMVzJX908z2t
+[1;30mERROR[0m [31mIn setup(services.py) --> Couldn't connect to MQTT Broker.[0m
+Traceback (most recent call last):
+  File "ideam2modbus.py", line 11, in <module>
+    client.connect("localhost", 1883, 60)
+  File "/home/pi/.local/lib/python3.5/site-packages/paho/mqtt/client.py", line 768, in connect
+    return self.reconnect()
+  File "/home/pi/.local/lib/python3.5/site-packages/paho/mqtt/client.py", line 895, in reconnect
+    sock = socket.create_connection((self._host, self._port), source_address=(self._bind_address, 0))
+  File "/usr/lib/python3.5/socket.py", line 712, in create_connection
+    raise err
+  File "/usr/lib/python3.5/socket.py", line 703, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+[1;30mINFO[0m Server.__init__ -> baseUrl: https://ideam:8443/api/1.0.0
+[1;30mINFO[0m Loaded device -> cityssl
+[1;30mINFO[0m Device.__init__ -> device instantiated with apikey: eXONzytcviiloR9v4k1Q7KyRmLdBBiTWMVzJX908z2t
+[1;30mERROR[0m [31mIn setup(services.py) --> Couldn't connect to MQTT Broker.[0m
+Traceback (most recent call last):
+  File "ideam2modbus.py", line 11, in <module>
+    client.connect("localhost", 1883, 60)
+  File "/home/pi/.local/lib/python3.5/site-packages/paho/mqtt/client.py", line 768, in connect
+    return self.reconnect()
+  File "/home/pi/.local/lib/python3.5/site-packages/paho/mqtt/client.py", line 895, in reconnect
+    sock = socket.create_connection((self._host, self._port), source_address=(self._bind_address, 0))
+  File "/usr/lib/python3.5/socket.py", line 712, in create_connection
+    raise err
+  File "/usr/lib/python3.5/socket.py", line 703, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+[1;30mINFO[0m Server.__init__ -> baseUrl: https://ideam:8443/api/1.0.0
+[1;30mINFO[0m Loaded device -> cityssl
+[1;30mINFO[0m Device.__init__ -> device instantiated with apikey: eXONzytcviiloR9v4k1Q7KyRmLdBBiTWMVzJX908z2t
+[1;30mERROR[0m [31mIn setup(services.py) --> Couldn't connect to MQTT Broker.[0m
+Traceback (most recent call last):
+  File "ideam2modbus.py", line 2, in <module>
+    import loggingcolormod
+  File "/home/pi/RBCCPS-Collab/ideam/loggingcolormod.py", line 1, in <module>
+    import coloredlogs
+ImportError: No module named 'coloredlogs'
+Traceback (most recent call last):
+  File "modbus2ideam.py", line 14, in <module>
+    import loggingcolormod
+  File "/home/pi/RBCCPS-Collab/ideam/loggingcolormod.py", line 1, in <module>
+    import coloredlogs
+ImportError: No module named 'coloredlogs'
