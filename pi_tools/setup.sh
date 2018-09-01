@@ -39,6 +39,18 @@ echo "@reboot /home/pi/begin.sh" >> crontab.tmp
 crontab crontab.tmp
 
 
+cd RBCCPS-Collab/tinc/tinc_conf/
+
+echo ""
+echo "*************************"
+echo "Change the TINC_SUBNET_IP"
+echo "*************************"
+sleep 3
+
+
+nano Makefile
+make
+
 #deactivate
 
 
