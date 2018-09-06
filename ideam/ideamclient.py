@@ -1,11 +1,18 @@
+
 import yaml
 import json
 import requests
 
+
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 import logging
 import loggingcolormod
 
-
+from simple_rest_client.api import API
 
 
 class Helper(object):
@@ -38,8 +45,21 @@ class Server(object):
 
         logging.info("Server.__init__ -> baseUrl: %s" % self.baseUrl)
 
-    def publishUrl(self):
-        return "{}/{}".format(self.baseUrl,"publish")
+
+        self.api = API(
+                api_root_url=self.baseUrl,
+                params={},
+                headers={},
+                timeout=2,
+                append_slash=False,
+                json_encode_body=True
+                )
+
+    def publishUrl(self,exchange):
+        return "{}/publish/{}".format(self.baseUrl,exchange)
+    
+    def subscribeUrl(self,queue,nMsgs):
+        return "{}/subscribe/{}/{}".format(self.baseUrl,queue,nMsgs)
 
             
 class User(object):
@@ -49,31 +69,53 @@ class User(object):
         logging.info("User.__init__ -> server registered")
 
 class Device(object):
-    def __init__(self,devApiKey,server):
+    def __init__(self,devName,devApiKey,server):
+        self.devName = devName
         self.server = server
         self.devApiKey = devApiKey
         self.helper = Helper()
-        logging.info("Device.__init__ -> device instantiated with apikey: %s" % self.devApiKey)
+        
+        logging.info("Device.__init__ -> device:%s instantiated with apikey: %s" % (self.devName,self.devApiKey) )
+        
 
-    def publish(self,exchange,data):
+
+    def register(self):
+        pass
+        
+
+    def publish(self,relativeExchangeName,data):
         headers = {"Cache-Control": "no-cache","apikey": self.devApiKey,'routingKey':'#'}
         
         #jayload={"exchange":exchange,"body":data}
         #result=requests.post(server.publishUrl(),headers=headers,json=jayload)
+        exchange = "{}.{}".format(self.devName,relativeExchangeName)
         
-        result=requests.post("{}/{}".format(server.publishUrl(),exchange),headers=headers,json=data,verify=False)
+        result=requests.post(self.server.publishUrl(exchange),headers=headers,json=data,verify=False)
         ok,status = self.helper.checkHTTPResponse(result)
        
         if ok:
-           logging.warning("Device.publish -> %s" % status)
+            logging.warning("Device.publish -> %s" % status)
+            return result
         else:
             logging.warning("Device.publish -> Failed with HTTP code: %s" % status)
             logging.info(result.text)
+            return None
         
-        return result
 
-
-
+    def subscribe(self,relativeQueueName="follow",nMessages=1):
+        headers = {"Cache-Control": "no-cache","apikey": self.devApiKey}
+        
+        queue = "{}.{}".format(self.devName,relativeQueueName)        
+        
+        result = requests.get(self.server.subscribeUrl(queue ,nMessages), headers=headers, verify=False)
+        ok,status=self.helper.checkHTTPResponse(result)
+        
+        if ok:
+            logging.info("In ideamclient:subscribe -> status: %s" % status)
+            return result
+        else:
+            logging.error("In ideamclient:subscribe -> Failed with status: %s" % status)
+            return None
 
 helper = Helper()
 
@@ -81,13 +123,36 @@ serverConf=helper.loadYaml("config/server")
 server = Server(serverConf["host"],serverConf["port"],serverConf["relativeApiBase"])
 
 devicesConf=helper.loadYaml("config/devices")
-for dConf in devicesConf:
-    devConf = devicesConf[dConf]
+for devName in devicesConf:
+    devConf = devicesConf[devName]
 
-logging.info("Loaded device -> %s" % dConf)
-device = Device(devConf["apikey"],server)
+logging.info("Loaded device -> %s" % devName)
+device = Device(devName,devConf["apikey"],server)
+
+
+    
 
 if __name__ == "__main__":
 
-    r=device.publish("hello","world")
-    logging.info("Received -> %s" % r.text)
+    import time
+    while True:
+        r=device.subscribe("follow")
+        r=r.json()
+        print(r)
+        if len(r):
+            pass
+        else: 
+            break
+
+    print("======="*10)
+    time.sleep(2)
+
+    for _ in range(10):
+        #r=device.publish("follow","world:%s"%_)
+        r=device.publish("protected","world:%s"%_)
+        print(r.request.url)
+
+        logging.info("Received -> %s" % r.text)
+        #r=device.subscribe("follow")
+        #print(r.json())
+        #time.sleep(1)

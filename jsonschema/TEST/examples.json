@@ -1,5 +1,5 @@
 {
-    "observationExample" : {
+    "observation" : {
         "messageType": "observation",
           "timestamp":"1937-01-01T12:00:27.87+00:20",
           "messageID": 101,
@@ -10,7 +10,7 @@
           "temperature_cpu": 30.9
     },
 
-    "actuationExample" : {
+    "actuation" : {
         "messageType": "actuation",
           "timestamp":"1937-01-01T12:00:27.87+00:20",
           "messageID": 101,

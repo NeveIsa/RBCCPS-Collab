@@ -130,7 +130,7 @@ class Manager(object):
 
 def publish():
     try:
-        icdev.publish("cityssl.private",json.dumps(msg))
+        icdev.publish("protected",json.dumps(msg))
     except Exception as e:
         logging.error("Failed to publish to IDEAM: %s" % e)
 

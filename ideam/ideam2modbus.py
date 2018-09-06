@@ -40,12 +40,12 @@ def on_channel_open(new_channel):
     """Called when our channel has opened"""
     global channel
     channel = new_channel
-    channel.queue_declare(queue="test", durable=True, exclusive=False, auto_delete=False, callback=on_queue_declared)
+    channel.queue_declare(queue="cityssl.private", durable=True, exclusive=False, auto_delete=False, callback=on_queue_declared)
 
 # Step #4
 def on_queue_declared(frame):
     """Called when RabbitMQ has told us our Queue has been declared, frame is the response from RabbitMQ"""
-    channel.basic_consume(handle_delivery, queue='test',no_ack=True)
+    channel.basic_consume(handle_delivery, queue='cityssl.private',no_ack=True)
 
 # Step #5
 def handle_delivery(channel, method, header, body):
@@ -57,12 +57,21 @@ def handle_delivery(channel, method, header, body):
 # Step #1: Connect to RabbitMQ using the default parameters
 #parameters = pika.ConnectionParameters()
 
-credentials = pika.PlainCredentials('test', 'test')
-parameters = pika.ConnectionParameters('server',
-                                       5672,'/',
+#credentials = pika.PlainCredentials('test', 'test')
+
+#parameters = pika.ConnectionParameters('server',
+#                                       5672,'/',
+#                                       credentials)
+
+
+'''
+credentials = pika.PlainCredentials('cityssl', 'eXONzytcviiloR9v4k1Q7KyRmLdBBiTWMVzJX908z2t')
+
+parameters = pika.ConnectionParameters('ideam',
+                                       12082,'/',
                                        credentials)
 
-connection = pika.SelectConnection(parameters, on_connected,)
+#connection = pika.SelectConnection(parameters, on_connected,)
 
 try:
     # Loop so we can communicate with RabbitMQ
@@ -73,3 +82,22 @@ except KeyboardInterrupt:
     # Loop until we're fully closed, will stop on its own
     connection.ioloop.start()
     client.loop_stop()
+'''
+
+### HTTP SUBSCRIBE
+
+import time
+import ideamclient as ic
+
+#helper = ic.Helper()
+#mqttconf=helper.loadYaml("config/mqttConf")
+
+icdev = ic.device
+
+while True:
+    result=icdev.subscribe("configure")
+    print(result.json())
+    time.sleep(1)
+
+
+

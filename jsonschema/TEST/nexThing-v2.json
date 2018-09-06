@@ -16,8 +16,8 @@
     "ontologyRef": "http://www.w3.org/2003/01/geo/wgs84_pos#"
   },
   "owner": {
-    "name": "Owner Name",
-    "website": "http://owner.web.site[Optional]"
+    "name": "RBCCPS",
+    "website": "http://rbccps.org"
   },
   "provider": {
     "name": "Provider Name",
@@ -26,27 +26,9 @@
   "message_schemas": {
     "type": "object",
     "properties": {
-      "MESSAGE1": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "describes": "describes the message",
-        "direction": "fromThing",
-        "priority": "low",
-        "tags": [
-          "tags about the message"
-        ],
-        "sharing": "public",
-        "properties": {
-          "param1": {
-            "type": "number",
-            "description": "describes the params"
-          }
-        },
-        "additionalProperties": false
-      },
       "observation": {
         "type": "object",
-        "$schema": "http://json-schema.org/draft-07/schema#",
+        "schema": "http://json-schema.org/draft-07/schema#",
         "describes": "data schema for streetlight",
         "direction": "fromThing",
         "sharing": "public",
@@ -55,12 +37,12 @@
           "temperature",
           "observation",
           "brightness",
+          "outputLux",
           "voltage",
           "current"
         ],
         "additionalProperties": false,
         "required": [
-          "messageType",
           "timestamp",
           "messageID"
         ],
@@ -77,7 +59,7 @@
             "description": "description of the message type"
           },
           "timestamp": {
-            "type": "number",
+            "type": "string",
             "format": "date-time",
             "description": "event instant"
           },
@@ -112,7 +94,7 @@
       },
       "actuation": {
         "type": "object",
-        "$schema": "http://json-schema.org/draft-07/schema#",
+        "schema": "http://json-schema.org/draft-07/schema#",
         "direction": "toThing",
         "sharing": "protected",
         "priority": "low",
@@ -123,7 +105,6 @@
           "brightness"
         ],
         "required": [
-          "messageType",
           "timestamp",
           "messageID"
         ],
@@ -131,7 +112,7 @@
         "anyOf": [
           {
             "required": [
-              "brightness"
+              "outputLux"
             ]
           },
           {
@@ -153,16 +134,16 @@
           "messageType": {
             "type": "string",
             "enum": [
-              "observation"
+              "actuation"
             ],
             "description": "description of the message type"
           },
           "timestamp": {
-            "type": "number",
+            "type": "string",
             "format": "date-time",
             "description": "event instant"
           },
-          "brightness": {
+          "outputLux": {
             "type": "number",
             "minimum": 0,
             "maximum": 100,
@@ -183,7 +164,7 @@
       },
       "management": {
         "type": "object",
-        "$schema": "http://json-schema.org/draft-07/schema#",
+        "schema": "http://json-schema.org/draft-07/schema#",
         "direction": "toThing",
         "sharing": "public",
         "priority": "low",
@@ -193,7 +174,6 @@
           "management"
         ],
         "required": [
-          "messageType",
           "timestamp",
           "messageID",
           "request"
@@ -207,12 +187,12 @@
           "messageType": {
             "type": "string",
             "enum": [
-              "observation"
+              "management"
             ],
             "description": "description of the message type"
           },
           "timestamp": {
-            "type": "number",
+            "type": "string",
             "format": "date-time",
             "description": "event instant"
           },
@@ -224,7 +204,7 @@
       },
         "solicitation": {
           "type": "object",
-          "$schema": "http://json-schema.org/draft-07/schema#",
+          "schema": "http://json-schema.org/draft-07/schema#",
           "direction": "fromThing",
           "sharing": "public",
           "priority": "low",
@@ -235,7 +215,6 @@
             "request action"
           ],
           "required": [
-            "messageType",
             "timestamp",
             "messageID",
             "request"
@@ -249,12 +228,12 @@
             "messageType": {
               "type": "string",
               "enum": [
-                "observation"
+                "solicitation"
               ],
               "description": "description of the message type"
             },
             "timestamp": {
-              "type": "number",
+              "type": "string",
               "format": "date-time",
               "description": "event instant"
             },
@@ -266,7 +245,7 @@
         },
         "response": {
           "type": "object",
-          "$schema": "http://json-schema.org/draft-07/schema#",
+          "schema": "http://json-schema.org/draft-07/schema#",
           "direction": "fromThing",
           "sharing": "public",
           "priority": "low",
@@ -275,7 +254,6 @@
             "response"
           ],
           "required": [
-            "msgType",
             "timestamp",
             "messageID",
             "response",
@@ -290,12 +268,12 @@
             "messageType": {
               "type": "string",
               "enum": [
-                "observation"
+                "response"
               ],
               "description": "description of the message type"
             },
             "timestamp": {
-              "type": "number",
+              "type": "string",
               "format": "date-time",
               "description": "event instant"
             },
