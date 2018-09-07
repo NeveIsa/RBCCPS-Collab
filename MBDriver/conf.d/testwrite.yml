@@ -54,7 +54,7 @@ readRegs:
           unit: adc_raw
           rate: 0.1
           scaling: 1.0
-          mqttSubTopic: brightness  #LDR output
+          mqttSubTopic: outputLux  #LDR output
 
           #        - regType: holding
           #          addr: 3000
