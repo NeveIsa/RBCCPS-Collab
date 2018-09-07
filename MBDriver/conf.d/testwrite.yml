@@ -25,7 +25,7 @@ readRegs:
           nRegs: 1
           unpackFormat: uint16
           unit: Celsius
-          rate: 1
+          rate: 0.1
           scaling: 0.01831
           mqttSubTopic: temperature
 
@@ -34,7 +34,7 @@ readRegs:
           nRegs: 1
           unpackFormat: uint16
           unit: Volts
-          rate: 1
+          rate: 0.1
           scaling: 0.003706
           mqttSubTopic: voltage
 
@@ -43,7 +43,7 @@ readRegs:
           nRegs: 1
           unpackFormat: uint16
           unit: Amps
-          rate: 1
+          rate: 0.1
           scaling: 0.0013428
           mqttSubTopic: current
 
@@ -52,7 +52,7 @@ readRegs:
           nRegs: 1
           unpackFormat: uint16
           unit: adc_raw
-          rate: 1
+          rate: 0.1
           scaling: 1.0
           mqttSubTopic: brightness  #LDR output
 
@@ -61,7 +61,7 @@ readRegs:
           nRegs: 1
           unpackFormat: uint16
           unit: raw_adc
-          rate: 1
+          rate: 0.1
           scaling: 1.0
           mqttSubTopic: temperature_cpu
 
