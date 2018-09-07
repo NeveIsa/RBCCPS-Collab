@@ -128,14 +128,14 @@ class Manager(object):
         return self.msgQueue.get()
 
 
-def publish():
+def publish(message):
     try:
-        icdev.publish("protected",json.dumps(msg))
+        icdev.publish("protected",json.dumps(message))
     except Exception as e:
         logging.error("Failed to publish to IDEAM: %s" % e)
 
     import requests
-    requests.get("https://dweet.io/dweet/for/cityssl",params=msg)
+    requests.get("https://dweet.io/dweet/for/cityssl",params=message)
 
 
 if __name__ == "__main__":
@@ -157,4 +157,4 @@ if __name__ == "__main__":
             msg=m.create({key:message})
             logging.error("Received: %s" % msg)
 
-            pool.apply_async(publish, ())
+            pool.apply_async(publish, (m,))
