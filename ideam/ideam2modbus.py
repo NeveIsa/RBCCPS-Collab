@@ -13,8 +13,8 @@ client.loop_start()
 
 def decode_msg_and_publish(msg):
     try:
-        msg = msg.decode("utf")
-        msg=json.loads(msg)
+        #msg = msg.decode("utf")
+        #msg=json.loads(msg)
         if "brightness" in msg:
             topic="deviceAction/modbus/brightness_percent"
 
@@ -94,13 +94,36 @@ import ideamclient as ic
 
 icdev = ic.device
 
+
+counter=0
+
+from message import Message
+m=Message("actuation")
+
 while True:
+    
     import datetime
-    result=icdev.subscribe("configure")
-    msg=result.json()
-    print(msg,datetime.datetime.now().isoformat())
     
     time.sleep(1)
+    result=icdev.subscribe("configure")
+
+    try:
+        msgs=result.json()
+    except Exception as e:
+        logging.error("Failed to json load the payload: %s" %s result.text)
+        continue
+
+    print(msgs,datetime.datetime.now().isoformat())
+    
+    if not len(msgs):
+        counter=(counter+10)%100
+        msg={"actuation":{"timestamp":datetime.datetime.now().isoformat(),"messageID":100,"brightness": counter}}
+
+    for msg in msgs:
+        msgBody = m.unpack(msg)
+        decode_msg_and_publish(msgBody)
+
+
 
 
 
