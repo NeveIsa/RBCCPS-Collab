@@ -104,7 +104,7 @@ while True:
     
     import datetime
     
-    time.sleep(1)
+    time.sleep(12)
     result=icdev.subscribe("configure")
 
     try:
