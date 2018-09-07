@@ -95,8 +95,9 @@ import ideamclient as ic
 icdev = ic.device
 
 while True:
+    import datetime
     result=icdev.subscribe("configure")
-    print(result.json())
+    print(result.json(),datetime.datetime.now().isoformat())
     time.sleep(1)
 
 
