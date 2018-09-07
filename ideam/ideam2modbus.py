@@ -110,7 +110,7 @@ while True:
     try:
         msgs=result.json()
     except Exception as e:
-        logging.error("Failed to json load the payload: %s" %s result.text)
+        logging.error("Failed to json load the payload: %s" % result.text)
         continue
 
     print(msgs,datetime.datetime.now().isoformat())
