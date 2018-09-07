@@ -56,14 +56,14 @@ readRegs:
           scaling: 1.0
           mqttSubTopic: brightness  #LDR output
 
-        - regType: holding
-          addr: 3000
-          nRegs: 1
-          unpackFormat: uint16
-          unit: raw_adc
-          rate: 0.1
-          scaling: 1.0
-          mqttSubTopic: temperature_cpu
+          #        - regType: holding
+          #          addr: 3000
+          #          nRegs: 1
+          #          unpackFormat: uint16
+          #          unit: raw_adc
+          #          rate: 0.1
+          #          scaling: 1.0
+          #          mqttSubTopic: temperature_cpu
 
 writeRegs:
         - regType: holding
