@@ -130,7 +130,7 @@ class Manager(object):
 
 def publish(message):
     try:
-        icdev.publish("protected",json.dumps(message))
+        icdev.publish("protected",message)
     except Exception as e:
         logging.error("Failed to publish to IDEAM: %s" % e)
 
@@ -155,6 +155,6 @@ if __name__ == "__main__":
             message = json.loads(mqttmsg["message"].decode("utf"))[0]
 
             msg=m.create({key:message})
-            logging.error("Received: %s" % msg)
+            logging.info("Received: %s" % msg)
 
             pool.apply_async(publish, (msg,))
