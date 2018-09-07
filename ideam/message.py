@@ -13,7 +13,9 @@ class Message:
 
         self.messageID+=1
 
-        return jsonmsg
+        finalmsg = {self.msgtype: jsonmsg}
+
+        return finalmsg
 
 
 
