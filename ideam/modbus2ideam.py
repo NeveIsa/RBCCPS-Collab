@@ -157,4 +157,4 @@ if __name__ == "__main__":
             msg=m.create({key:message})
             logging.error("Received: %s" % msg)
 
-            pool.apply_async(publish, (m,))
+            pool.apply_async(publish, (msg,))
