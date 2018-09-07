@@ -117,7 +117,7 @@ while True:
     
     if not len(msgs):
         counter=(counter+10)%100
-        msg={"actuation":{"timestamp":datetime.datetime.now().isoformat(),"messageID":100,"brightness": counter}}
+        msg={"actuation":{"timestamp":datetime.datetime.now().isoformat(),"messageID":1234321,"brightness": counter}}
 
     for msg in msgs:
         msgBody = m.unpack(msg)
