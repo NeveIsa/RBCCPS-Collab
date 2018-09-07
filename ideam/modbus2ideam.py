@@ -154,7 +154,7 @@ if __name__ == "__main__":
             key = mqttmsg["subtopic"].split("/")[-1]
             message = json.loads(mqttmsg["message"].decode("utf"))[0]
 
-            msg=m.create({key:message})
+            msg=m.pack({key:message})
             logging.info("Received: %s" % msg)
 
             pool.apply_async(publish, (msg,))

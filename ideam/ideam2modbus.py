@@ -97,7 +97,9 @@ icdev = ic.device
 while True:
     import datetime
     result=icdev.subscribe("configure")
-    print(result.json(),datetime.datetime.now().isoformat())
+    msg=result.json()
+    print(msg,datetime.datetime.now().isoformat())
+    
     time.sleep(1)
 
 

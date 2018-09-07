@@ -6,22 +6,32 @@ class Message:
         self.msgtype = msgtype
         self.messageID=1
 
-    def create(self,jsonmsg={}):
-        jsonmsg["timestamp"]=datetime.datetime.now().isoformat()
-        jsonmsg["type"]=self.msgtype
-        jsonmsg["messageID"]=self.messageID
+    def pack(self,msg={}):
+        msg["timestamp"]=datetime.datetime.now().isoformat()
+        msg["type"]=self.msgtype
+        msg["messageID"]=self.messageID
 
         self.messageID+=1
 
-        finalmsg = {self.msgtype: jsonmsg}
+        finalmsg = {self.msgtype: msg}
 
         return finalmsg
+
+    def unpack(self,msg):
+        if self.msgtype in msg.keys():
+            payload = msg[self.msgtype]
+            return payload
+        else:
+            return False
 
 
 
 if __name__=="__main__":
     m=Message()
-    print(m.create({"temp":"10"}))
-    print(m.create({"temp":"20"}))
-    print(m.create({"temp":"30"}))
-    print(m.create({"temp":"40"}))
+    print(m.pack({"temp":"10"}))
+    print(m.pack({"temp":"20"}))
+    
+    print(m.unpack(m.pack({"temp":"30"})))
+    print(m.unpack(m.pack({"temp":"40"})))
+
+    
