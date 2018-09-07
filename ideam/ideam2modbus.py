@@ -121,9 +121,8 @@ while True:
 
     for msg in msgs:
         msgBody = m.unpack(msg)
+        logging.info("Message Body -> %s" % msgBody)
         decode_msg_and_publish(msgBody)
-
-
 
 
 
