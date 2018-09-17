@@ -27,3 +27,21 @@ Timeout from externalnyc (139.59.61.68 port 655) during authentication
 Could not set up a meta connection to externalnyc
 Trying to re-establish outgoing connection in 20 seconds
 Purging unreachable nodes
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 25 seconds
+Purging unreachable nodes
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 30 seconds
+Purging unreachable nodes
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 35 seconds
+Purging unreachable nodes
