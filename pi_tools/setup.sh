@@ -4,7 +4,7 @@ sudo apt install -y python python-dev python-pip python3 python3-dev python3-pip
 
 sudo apt install -y git mosquitto  mosquitto-clients
 
-sudo pip install -y virtualenv
+#sudo pip install -y virtualenv
 
 
 systemctl enable mosquitto
@@ -15,8 +15,8 @@ sudo service mosquitto start
 [ ! -e ~/RBCCPS-Collab ] && git clone https://github.com/neveisa/RBCCPS-Collab ~
 
 
-[ ! -e ~/smartcity_venv ]  && virtualenv ~/smartcity_venv
-source ~/smartcity_venv/bin/activate
+#[ ! -e ~/smartcity_venv ]  && virtualenv ~/smartcity_venv
+#source ~/smartcity_venv/bin/activate
 
 cd ~/RBCCPS-Collab
 git pull
