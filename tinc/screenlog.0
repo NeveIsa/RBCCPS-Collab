@@ -51,3 +51,12 @@ Timeout from externalnyc (139.59.61.68 port 655) during authentication
 Could not set up a meta connection to externalnyc
 Trying to re-establish outgoing connection in 40 seconds
 Purging unreachable nodes
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 45 seconds
+Purging unreachable nodes
+)0[?1049h[4l[?1h=[0m(B[1;24r[H[J[H[JA tincd is already running for net `netname' with pid 4390.
+[?1l>[24;1H
+[?1049l[screen is terminating]

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "modbus2ideam.py", line 19, in <module>
+    import ideamclient as ic
+  File "/home/pi/RBCCPS-Collab/ideam/ideamclient.py", line 15, in <module>
+    from simple_rest_client.api import API
+ImportError: No module named 'simple_rest_client'
+Traceback (most recent call last):
+  File "ideam2modbus.py", line 90, in <module>
+    import ideamclient as ic
+  File "/home/pi/RBCCPS-Collab/ideam/ideamclient.py", line 15, in <module>
+    from simple_rest_client.api import API
+ImportError: No module named 'simple_rest_client'
