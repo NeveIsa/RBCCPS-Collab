@@ -31,3 +31,7 @@ Traceback (most recent call last):
   File "/home/pi/RBCCPS-Collab/MBDriver/loggingcolormod.py", line 1, in <module>
     import coloredlogs
 ImportError: No module named 'coloredlogs'
+[1;30mWARNING[0m [33mIn setup(services.py) --> Connecting to MQTT Broker @ localhost:1883[0m
+[1;30mINFO[0m Attempting : /dev/ttyUSB0:19200
+[1;30mERROR[0m [31m[Errno 2] could not open port /dev/ttyUSB0: [Errno 2] No such file or directory: '/dev/ttyUSB0'[0m
+[1;30mERROR[0m [31mCould not connect to serial port... Exiting[0m

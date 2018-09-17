@@ -1,0 +1,29 @@
+)0[?1049h[4l[?1h=[0m(B[1;24r[H[J[H[Jtincd 1.0.31 starting, debug level 3
+/dev/net/tun is a Linux tun/tap device (tun mode)
+Executing script tinc-up
+Listening on 0.0.0.0 port 655
+Ready
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 5 seconds
+Purging unreachable nodes
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 10 seconds
+Purging unreachable nodes
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 15 seconds
+Purging unreachable nodes
+No value for variable `' on line 3 while reading config file /etc/tinc/netname/hosts/externalnyc
+Trying to connect to externalnyc (139.59.61.68 port 655)
+Timeout from externalnyc (139.59.61.68 port 655) during authentication
+Could not set up a meta connection to externalnyc
+Trying to re-establish outgoing connection in 20 seconds
+Purging unreachable nodes
