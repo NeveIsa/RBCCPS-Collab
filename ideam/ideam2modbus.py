@@ -40,12 +40,12 @@ def on_channel_open(new_channel):
     """Called when our channel has opened"""
     global channel
     channel = new_channel
-    channel.queue_declare(queue="cityssl.private", durable=True, exclusive=False, auto_delete=False, callback=on_queue_declared)
+    channel.queue_declare(queue="elcitasliisc1", durable=True, exclusive=False, auto_delete=False, callback=on_queue_declared)
 
 # Step #4
 def on_queue_declared(frame):
     """Called when RabbitMQ has told us our Queue has been declared, frame is the response from RabbitMQ"""
-    channel.basic_consume(handle_delivery, queue='cityssl.private',no_ack=True)
+    channel.basic_consume(handle_delivery, queue='elcitasliisc1',no_ack=True)
 
 # Step #5
 def handle_delivery(channel, method, header, body):
@@ -64,25 +64,26 @@ def handle_delivery(channel, method, header, body):
 #                                       credentials)
 
 
-'''
-credentials = pika.PlainCredentials('cityssl', 'eXONzytcviiloR9v4k1Q7KyRmLdBBiTWMVzJX908z2t')
 
-parameters = pika.ConnectionParameters('ideam',
-                                       12082,'/',
-                                       credentials)
+#credentials = pika.PlainCredentials('cityssl', 'eXONzytcviiloR9v4k1Q7KyRmLdBBiTWMVzJX908z2t')
+#credentials = pika.PlainCredentials('elcitasliisc1', 'o5az6OtwUyMiqvEMuQ0EpAgwUm32kWp3-Qao4CFMvNZ')
+
+#parameters = pika.ConnectionParameters('electroniccity.rbccps.org',
+#                                       12082,'/',
+#                                       credentials)
 
 #connection = pika.SelectConnection(parameters, on_connected,)
 
-try:
+#try:
     # Loop so we can communicate with RabbitMQ
-    connection.ioloop.start()
-except KeyboardInterrupt:
+#    connection.ioloop.start()
+#except KeyboardInterrupt:
     # Gracefully close the connection
-    connection.close()
+#    connection.close()
     # Loop until we're fully closed, will stop on its own
-    connection.ioloop.start()
-    client.loop_stop()
-'''
+#    connection.ioloop.start()
+#    client.loop_stop()
+
 
 ### HTTP SUBSCRIBE
 

@@ -22,7 +22,7 @@ class Helper(object):
         self.HTTPERROR=500
     
     def loadYaml(self,filename):
-        return yaml.load(open(filename+".yml").read())
+        return yaml.load(open(filename+".yaml").read())
 
     def checkHTTPResponse(self,resp):
         status = resp.status_code
@@ -31,6 +31,45 @@ class Helper(object):
             return True,status
         else:
             return False,status
+
+    def loadDeviceByName(self,_name,_server):
+        devicesConf=self.loadYaml("config/devices")
+        if not _name in devicesConf:
+            logging.error("Helper.loadDeviceByName --> Device by name: {} not present in config/devices.yaml")
+            return None
+
+        devConf = devicesConf[_name]
+        device = Device(_name,devConf["apikey"],_server)
+        logging.info("Helper.loadDeviceByName --> Loaded device: %s" % _name)
+
+        return device
+
+    def loadDeviceByIndex(self,_index,_server):
+        devicesConf=self.loadYaml("config/devices")
+        if _index > len(devicesConf)-1:
+            logging.error("Helper.loadDeviceByName --> given index is more than devices found in config/devices.yaml")
+            return None
+
+        _name = list(devicesConf.keys())[_index]
+        #print (_name)
+        devConf = devicesConf[_name]
+        print (devConf)
+        device = Device(_name,devConf["apikey"],_server)
+        logging.info("Helper.loadDeviceByName --> Loaded device: %s" % _name)
+
+        return device
+
+    def listDevices(self):
+        devicesConf=self.loadYaml("config/devices")
+        index=0
+        print ("Listing devices in config file...")
+        for devName in devicesConf:
+            print ("{} - {}".format(index,devName))
+            index+=1
+
+
+
+
 
 class Server(object):
     def __init__(self,host,port,relative_api_base_url):
@@ -49,11 +88,13 @@ class Server(object):
         self.api = API(
                 api_root_url=self.baseUrl,
                 params={},
-                headers={},
+                headers={'Cache-Control':'no-cache','Content-Type':'application/json'},
                 timeout=2,
                 append_slash=False,
                 json_encode_body=True
                 )
+
+        self.api.add_resource(resource_name='register')
 
     def publishUrl(self,exchange):
         return "{}/publish/{}".format(self.baseUrl,exchange)
@@ -79,16 +120,21 @@ class Device(object):
         
 
 
-    def register(self):
-        pass
+    def register(self,schema=None):
+        if not schema:
+            schema = {}
+        r=self.api.register.create(body=schema, headers={'apikey':'guest'})
         
 
-    def publish(self,relativeExchangeName,data):
+    def publish(self,exchangeName,data,relative=True):
         headers = {"Cache-Control": "no-cache","apikey": self.devApiKey,'routingKey':'#'}
         
         #jayload={"exchange":exchange,"body":data}
         #result=requests.post(server.publishUrl(),headers=headers,json=jayload)
-        exchange = "{}.{}".format(self.devName,relativeExchangeName)
+        if relative:
+            exchange = "{}.{}".format(self.devName,exchangeName)
+        else:
+            exchange = exchangeName
         
         result=requests.post(self.server.publishUrl(exchange),headers=headers,json=data,verify=False)
         ok,status = self.helper.checkHTTPResponse(result)
@@ -102,11 +148,14 @@ class Device(object):
             return None
         
 
-    def subscribe(self,relativeQueueName="follow",nMessages=1):
+    def subscribe(self,queueName,nMessages=1,relative=True):
         headers = {"Cache-Control": "no-cache","apikey": self.devApiKey}
         
-        queue = "{}.{}".format(self.devName,relativeQueueName)        
-        
+        if relative:
+            queue = "{}.{}".format(self.devName,queueName)
+        else:
+            queue = queueName
+        logging.info("Subscribing to queue -> %s" % queue) 
         result = requests.get(self.server.subscribeUrl(queue ,nMessages), headers=headers, verify=False)
         ok,status=self.helper.checkHTTPResponse(result)
         
@@ -122,21 +171,17 @@ helper = Helper()
 serverConf=helper.loadYaml("config/server")
 server = Server(serverConf["host"],serverConf["port"],serverConf["relativeApiBase"])
 
-devicesConf=helper.loadYaml("config/devices")
-for devName in devicesConf:
-    devConf = devicesConf[devName]
-
-logging.info("Loaded device -> %s" % devName)
-device = Device(devName,devConf["apikey"],server)
-
-
+helper.listDevices()
+device = helper.loadDeviceByIndex(0,server)
     
 
 if __name__ == "__main__":
 
     import time
     while True:
-        r=device.subscribe("follow")
+
+        #r=device.publish("protected","world")
+        r=device.subscribe(device.devName,1,False)
         r=r.json()
         print(r)
         if len(r):
@@ -145,14 +190,15 @@ if __name__ == "__main__":
             break
 
     print("======="*10)
+    print("Flushed the queue")
+    print("======="*10)
     time.sleep(2)
 
     for _ in range(10):
         #r=device.publish("follow","world:%s"%_)
         r=device.publish("protected","world:%s"%_)
         print(r.request.url)
-
         logging.info("Received -> %s" % r.text)
-        #r=device.subscribe("follow")
-        #print(r.json())
-        #time.sleep(1)
+        r=device.subscribe(device.devName,1,False)
+        print(r.json())
+        time.sleep(1)
