@@ -1,0 +1,11 @@
+server:
+        host:
+                electroniccity.rbccps.org
+        port:
+                12082
+
+device:
+        name:
+                iiscstreetlight
+        apikey:
+                Hi4FODwN1PP6lXPUr8PFR4WB4w9sDm2YG5sPx4vEkI2
