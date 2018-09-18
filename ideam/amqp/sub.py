@@ -33,9 +33,6 @@ class AMQPsub:
             self.connection.close()
 
 
-
-
-
 if __name__=='__main__':
 
     import json
