@@ -186,8 +186,10 @@ if __name__ == "__main__":
         print(r)
         if len(r):
             pass
-        else: 
-            break
+        else:
+            time.sleep(5)
+            pass
+            #break
 
     print("======="*10)
     print("Flushed the queue")
