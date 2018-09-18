@@ -150,8 +150,8 @@ def writeReg(entry,data2write,encode2registers=True):
     else:
         logging.warning("In writeReg -> Wrote to devID:%s addr:%s value(s):%s" % (devID,addr,data2write))
 
-    import datetime
-    with open("xxx",'w') as g: g.write(datetime.datetime.now.isoformat())
+    #import datetime
+    #with open("xxx",'w') as g: g.write(datetime.datetime.now().isoformat())
 
 
 def subscribeIncomingSubTopic(subtopic):
