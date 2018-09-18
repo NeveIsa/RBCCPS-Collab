@@ -47,7 +47,6 @@ if __name__=='__main__':
                 subtopic = msg.topic.split("/")[-1]
                 msg_val = json.loads(msg.payload.decode())[0]
                 ideam_msg=Msg.pack({subtopic: msg_val})
-                import json
                 ideam_msg=json.dumps(ideam_msg)
                 p.publish(ideam_msg,config['device']['name']+".protected")
             except Exception as e:
