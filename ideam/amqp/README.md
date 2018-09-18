@@ -15,7 +15,7 @@
 
 #### Test procedures
 1. Clone this repo
-0. Install all python dependencies from files present in /req.txt of this repo and under /ideam/req.txt with `pip3 install -r req.txt`
-2. In this folder, run the file test.py with integer argument to set brightness by publishing on resourceName.configure [e.g. `python3 test.py 50` ]
-3. Next run `python3 test.py` (without arguments) to subscribe to resourceName queue
-4. NOTE: outputLux is inversely proportional to the brightness value set.
+2. Install all python dependencies from files present in /req.txt of this repo and under /ideam/req.txt with `pip3 install -r req.txt`
+3. In this folder, run the file test.py with integer argument to set brightness by publishing on resourceName.configure [e.g. `python3 test.py 50` ]
+4. Next run `python3 test.py` (without arguments) to subscribe to resourceName queue
+5. NOTE: outputLux is inversely proportional to the brightness value set.
