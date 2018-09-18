@@ -46,7 +46,17 @@ if __name__=='__main__':
     
     amqp = AMQPsub()
     
-    amqp.registerCallback(lambda data: mqtt.publish('deviceAction/modbus/brightness_percent', data))
+    def handler(data):
+        try:
+            data = json.loads(data)
+            data = Msg.unpack(data)
+            brightness = data["brightness"]
+            mqtt.publish('deviceAction/modbus/brightness_percent', '[%s]' % brightness)
+        except Exception as e:
+            print ('Exception in handler: {}'.format(data))
+
+
+    amqp.registerCallback(handler)
     amqp.subscribe(config['device']['name'] + ".configure")
 
     amqp.consume()
