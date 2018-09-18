@@ -52,6 +52,7 @@ if __name__=='__main__':
             data = Msg.unpack(data)
             brightness = data["brightness"]
             mqtt.publish('deviceAction/modbus/brightness_percent', '[%s]' % brightness)
+            print("--> Published %s" % brightness)
         except Exception as e:
             print ('Exception in handler: {}'.format(data))
 
