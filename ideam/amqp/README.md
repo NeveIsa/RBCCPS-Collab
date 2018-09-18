@@ -24,7 +24,7 @@
 	- pubamqp	=	Publish Sensors to CDX on resourceName.protected
 	- subamqp	=	Subscribe to CDX for commands on resourceName.configure
 
-#### Test procedures
+#### Test procedures [Not on the gateway, but a separate machine]
 1. Clone this repo
 2. Install all python dependencies from files present in /req.txt of this repo and under /ideam/req.txt with `pip3 install -r req.txt`
 3. In this folder, run the file test.py with integer argument to set brightness by publishing on resourceName.configure [e.g. `python3 test.py 50` ]
