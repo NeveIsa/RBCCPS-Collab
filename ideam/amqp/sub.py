@@ -50,6 +50,6 @@ if __name__=='__main__':
     amqp = AMQPsub()
     
     amqp.registerCallback(lambda data: mqtt.publish('deviceAction/modbus/brightness_percent', data))
-    amqp.subscribe(config['device']['name'])
+    amqp.subscribe(config['device']['name'] + ".configure")
 
     amqp.consume()
