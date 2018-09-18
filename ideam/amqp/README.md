@@ -1,14 +1,25 @@
 ### Operation guide -> Elcita Smart Street light
 
 
-#### Steps
+##### All services are brought up on reboot
 
+#### Steps to debug if reboot doesn't solve the issues
+---
 1. Check gateway is powered on and Ethernet is up
 2. Check IP is reachable - 192.168.10.220
 3. If needed, login -> pi:raspberry
-4. Go to /home/pi
-5. Run `./begin all`
-6. List of screens
+
+
+4. Become root by `sudo su`
+
+5. Run `screen -ls`
+
+6. Check if 3 screens named `drv`, `pubamqp` and `subamqp` are running [ `tinc` may be running aswell ]
+
+7. If the anyone of the screens above are not running then proceed below
+8. Go to /home/pi
+9. Run `./begin all`
+10. List of screens
 	- drv 		=	Modbus Driver
 	- pubamqp	=	Publish Sensors to CDX on resourceName.protected
 	- subamqp	=	Subscribe to CDX for commands on resourceName.configure
