@@ -1,6 +1,10 @@
 #!/bin/bash
 
+pkill screen
+
 [ -z $1 ] && sleep 20
+
+
 
 cd RBCCPS-Collab/MBDriver/
 screen -L -dmS drv python3 -B MBMASTER.py
