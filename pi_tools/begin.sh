@@ -8,7 +8,7 @@ pkill screen
 
 cd RBCCPS-Collab/MBDriver/
 #screen -L -dmS drv python3 -u -B MBMASTER.py
-screen -L -S drv
+screen -L -dmS drv
 screen -S drv -X stuff $'python3 -u -B MBMASTER.py |& tee ~/mb_log.txt\n'
 
 
