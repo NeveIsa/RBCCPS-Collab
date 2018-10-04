@@ -7,7 +7,7 @@ pkill screen
 
 
 cd RBCCPS-Collab/MBDriver/
-screen -L -dmS drv python3 -B MBMASTER.py
+screen -L -dmS drv python3 -u -B MBMASTER.py |& tee log.txt
 
 
 cd ../tinc

@@ -52,6 +52,8 @@ if __name__=='__main__':
             data = Msg.unpack(data)
             brightness = data["brightness"]
             mqtt.publish('deviceAction/modbus/brightness_percent', '[%s]' % brightness)
+            import os
+            os.system("mosquitto_pub -t deviceAction/modbus/brightness_percent -m '[%s]'" % brightness)
             print("--> Published %s" % brightness)
         except Exception as e:
             print ('Exception in handler: {}'.format(data))
