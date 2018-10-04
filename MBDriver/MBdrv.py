@@ -134,13 +134,16 @@ def writeReg(entry,data2write,encode2registers=True):
 
 
     if not _registers:
-        logging.error("In readReg -> Failed to convert using registers2data from datatypes.py module")
+        logging.error("In writeReg -> Failed to convert using registers2data from datatypes.py module")
         return
     
-    if len(_registers)==1:
-        result = client.write_register(addr, _registers[0], unit=devID)
-    else:
-        result = client.write_registers(addr, _registers, unit=devID)
+    try:
+        if len(_registers)==1:
+            result = client.write_register(addr, _registers[0], unit=devID)
+        else:
+            result = client.write_registers(addr, _registers, unit=devID)
+    except Exception as e:
+        logging.error("In writeReg -> Unable to write data to devID:%s addr:%s" % (devID,addr))
 
     
     logging.warning(result)
