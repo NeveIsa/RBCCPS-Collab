@@ -1,0 +1,5 @@
+#!/bin/bash
+screen -dmS notify-led python3 notify-led.py mqtt localhost 
+sleep 3
+screen -dmS eventColor bash eventColor.sh
+
